@@ -1,0 +1,6 @@
+Dejo enlace del diagrama de flujo, se que no era necesario pero me ayuda 
+tambien para poder hacer testing del codigo.
+
+Puede que las formas no sean las correctas pero bueno, la idea general esta jaja
+
+https://lucid.app/lucidchart/c731a12d-ad1b-4cd3-a221-04822bd7313f/edit?viewport_loc=651%2C804%2C1335%2C477%2C0_0&invitationId=inv_f955074e-6d53-481f-a4f5-a110781856c0#

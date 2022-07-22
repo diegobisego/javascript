@@ -1,5 +1,6 @@
-/* PEDIDOS PARA DISTRIBUIDORA DE ALIMENTOS
-- Se realiza un script para realizar pedidos mediante opciones seleccionadas
+/* AUTOGESTION PARA DISTRIBUIDORA DE ALIMENTOS
+    Se realiza un script para realizar pedidos, cargar creditos 
+    o fejar comentarios mediante opciones seleccionadas
 */
 
 
@@ -7,7 +8,6 @@
 
 //Error al contestar mal tipo de gestion
 const errorRespuestaTipoGestion = (seleccion) => {
-    debugger
     while (seleccion < 1 || seleccion > 3 || isNaN(seleccion)) {
         alert('Ha ingresado una respuesta erronea, por favor ingrese nuevamente una opcion');
         seleccion = Number(prompt('A Continuacion seleccione en numero que desea realizar: \n 1) Comprar \n 2) Pagar \n 3) Sugerencias'));
@@ -16,9 +16,8 @@ const errorRespuestaTipoGestion = (seleccion) => {
     seleccionProducto(seleccion)
 }
 
-//Error al contestar mal tipo de gestion
+//Error al contestar mal tipo de producto
 const errorRespuestaTipoProducto = () => {
-debugger
     let seleccion = 0;
 
     while (seleccion < 1 || seleccion > 3 || isNaN(seleccion)) {
@@ -26,14 +25,13 @@ debugger
         seleccion = Number(prompt('Seleccione el tipo de producto \n 1) Aceite \n 2) Aceitunas \n 3) Huevos'));  
           
     }
-    seleccionProducto(seleccion);
+    procesoPedido();
 }
 
 /************************** GENERAL ***************************** */ 
 
 //Proceso de pedido
 const procesoPedido = () => {
-    debugger
     let cantidad = Number(prompt('Ingrese la cantidad a comprar'));
 
     while (isNaN(cantidad) || cantidad < 0) {
@@ -47,7 +45,6 @@ const procesoPedido = () => {
 
 //seleccion de producto 
 const seleccionProducto = () => {
-    debugger
     let seleccion = Number(prompt('Seleccione el tipo de producto \n 1) Aceite \n 2) Aceitunas \n 3) Huevos'));  
 
     if (seleccion < 1 || seleccion > 3 || isNaN(seleccion)) {
@@ -59,7 +56,6 @@ const seleccionProducto = () => {
 }
 
 //Agrega credito a la cuenta
-
 const agregarCredito = () => {
     let credito = Number(prompt('Ingrese en forma numerica el credito a cargar en su cuenta'));
     while (isNaN(credito)) {
@@ -70,6 +66,7 @@ const agregarCredito = () => {
     alert(`Proceso realizado con exito! Se han cargado en su cuenta ${credito} puntos de credito`);
 }
 
+//agrega comentario
 const agregarComentario = () => {
     let comentario = prompt('Ingrese el comentario que nos desea dejar!');
     alert('Se ha guardado su comentario con exito! \n Comentario: \n' + comentario);
@@ -78,7 +75,7 @@ const agregarComentario = () => {
 
 //seleccion tipo de gestion 
 const tipoGestion = (seleccion) => {
-    debugger
+
     if (seleccion < 1 || seleccion > 3 || isNaN(seleccion)) {
 
         errorRespuestaTipoGestion(seleccion);
@@ -101,7 +98,7 @@ const tipoGestion = (seleccion) => {
 }
 
 
-/************************** Principal ***************************** */ 
+/************************** PRINCIPAL ***************************** */ 
 const programa = () => {
     const seleccion = Number(prompt('A Continuacion, seleccione en numero lo que desea realizar: \n 1) Comprar \n 2) Agregar Credito \n 3) Sugerencias'))
     tipoGestion(seleccion);
@@ -112,5 +109,6 @@ const programa = () => {
 
 /************************** EJECUCIONES ***************************** */ 
 
-alert('BIENVENIDO AL PORTAL DE AUTOGESTION')
-programa()
+alert('BIENVENIDO AL PORTAL DE AUTOGESTION');
+programa();
+alert('FIN DEL PROGRAMA');
