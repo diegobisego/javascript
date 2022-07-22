@@ -98,9 +98,9 @@ const tipoGestion = (seleccion) => {
 }
 
 
-/************************** PRINCIPAL ***************************** */ 
+/************************** INICIAL ***************************** */ 
 const programa = () => {
-    const seleccion = Number(prompt('A Continuacion, seleccione en numero lo que desea realizar: \n 1) Comprar \n 2) Agregar Credito \n 3) Sugerencias'))
+    const seleccion = Number(prompt('A Continuacion, seleccione en numero, que desea realizar \n 1) Comprar \n 2) Agregar Credito \n 3) Sugerencias'))
     tipoGestion(seleccion);
     
 }
