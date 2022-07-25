@@ -13,7 +13,7 @@ const errorRespuestaTipoGestion = (seleccion) => {
         seleccion = Number(prompt('A Continuacion seleccione en numero que desea realizar: \n 1) Comprar \n 2) Pagar \n 3) Sugerencias'));
     }
 
-    seleccionProducto(seleccion)
+    tipoGestion(seleccion)
 }
 
 //Error al contestar mal tipo de producto
@@ -99,16 +99,10 @@ const tipoGestion = (seleccion) => {
 
 
 /************************** INICIAL ***************************** */ 
-const programa = () => {
-    const seleccion = Number(prompt('A Continuacion, seleccione en numero, que desea realizar \n 1) Comprar \n 2) Agregar Credito \n 3) Sugerencias'))
-    tipoGestion(seleccion);
-    
-}
-
-
-
-/************************** EJECUCIONES ***************************** */ 
-
-alert('BIENVENIDO AL PORTAL DE AUTOGESTION');
-programa();
+alert('BIENVENIDO AL PORTAL DE AUTOGESTION')
+const seleccion = Number(prompt('A Continuacion, seleccione en numero, que desea realizar \n 1) Comprar \n 2) Agregar Credito \n 3) Sugerencias'))
+tipoGestion(seleccion);
 alert('FIN DEL PROGRAMA');
+    
+
+
