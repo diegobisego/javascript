@@ -85,42 +85,45 @@ const tipoGestion = () => {
 
 //ingresa un nuevo producto
 const ingresarProducto = () => {
-    
     const nombre = prompt('Ingrese el nombre del producto');
+    if(nombre == null){
+        tipoGestion()
+    }
     const precio = Number(prompt('ingrese el precio del producto'));
-    const cantidad = Number(prompt('Ingrese el stock del prducto'));
+    const cantidad = Number(prompt('Ingrese el stock del producto'));
 
+    let existe;
+
+    console.log(nombre)
     //verifica que tanto precio como cantidad sean ingresos correctos
-        if (isNaN(precio) || isNaN(cantidad) || nombre == "" || !isNaN(nombre)) {
+        if (isNaN(precio) || isNaN(cantidad) || nombre == "") {
             alert('HA INGRESADO DATOS INVALIDOS')
             ingresarProducto()
         } else {
-            const existe = productos.some(item => item.nombre == nombre)
+            existe = productos.some(item => item.nombre == nombre)
+        }
+           
 
         if (existe) {
             alert('EL PRODUCTO QUE QUIERE CARGAR YA SE ENCUENTRA EN LA BASE DE DATOS')
-            ingresarProducto()
+            tipoGestion()
         } else {
-
             //acumulador de ID de item
-            acumuladorId++
+                acumuladorId++
 
-        const nuevoProdcuto = new Producto;
+                const nuevoProdcuto = new Producto;
 
-        nuevoProdcuto.id = acumuladorId
-        nuevoProdcuto.nombre = nombre;
-        nuevoProdcuto.precio = precio;
-        nuevoProdcuto.cantidad = cantidad;
+                nuevoProdcuto.id = acumuladorId
+                nuevoProdcuto.nombre = nombre;
+                nuevoProdcuto.precio = precio;
+                nuevoProdcuto.cantidad = cantidad;
 
-        productos.push(nuevoProdcuto);
+                productos.push(nuevoProdcuto);
 
-        alert('PRODUCTO CARGADO CON EXITO')
-        volver(ingresarProducto)   
+                alert('PRODUCTO CARGADO CON EXITO')
+                volver(ingresarProducto)   
         }    
-    }
-
-        
-}
+}  
 
 //realiza proceso de seleccion final segun la respueta del usuario
 const seleccionFinal = (bool,fn,sel) => {
@@ -222,7 +225,7 @@ const manipularProducto = (seleccionManipular) => {
                 volver(manipularProducto,seleccionManipular)
             } else {
                 alert('EL NOMBRE INGRESADO NO EXISTE COMO PRODUCTO')
-                manipularProducto(seleccionManipular)
+                tipoGestion()
             }   
             
         }
