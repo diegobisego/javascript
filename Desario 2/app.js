@@ -43,11 +43,11 @@ let usuarios = []
 /************************** FUNCIONES ***************************** */ 
 
 //volver menu principal
-const volver = (fn) => {
+const volver = (fn, sel) => {
     debugger
     const respuesta = confirm('Confirme si desea volver a realizar el mismo procedimiento, \nen caso contrario cancele para volver al menu principal')
 
-    seleccionFinal(respuesta,fn)
+    seleccionFinal(respuesta,fn,sel)
 }
 
 //seleccion tipo de gestion 
@@ -76,7 +76,7 @@ const tipoGestion = () => {
             case 4:
                 listarProducto();
                 break;    
-            case 5:
+            default:
                 break;                  
         }  
     }
@@ -92,7 +92,7 @@ const ingresarProducto = () => {
 
     //verifica que tanto precio como cantidad sean ingresos correctos
         if (isNaN(precio) || isNaN(cantidad) || nombre == "" || !isNaN(nombre)) {
-            alert('HA INGRESADO UN PRECIO O CANTIDAD INVALIDO')
+            alert('HA INGRESADO DATOS INVALIDOS')
             ingresarProducto()
         } else {
             const existe = productos.some(item => item.nombre == nombre)
@@ -123,10 +123,10 @@ const ingresarProducto = () => {
 }
 
 //realiza proceso de seleccion final segun la respueta del usuario
-const seleccionFinal = (bool,fn) => {
+const seleccionFinal = (bool,fn,sel) => {
     debugger
     if (bool) {
-        fn();
+        fn(sel);
     } else {
         tipoGestion();
     }
@@ -143,86 +143,90 @@ const listarProducto = () => {
     tipoGestion()
 }
 
+const cargaExitosa = (seleccion,respuesta,seleccionManipular) => {
+    debugger
+    switch (respuesta) {
+        case 1:
+            const nombre = prompt(`Ingrese el nuevo nombre para el producto ${seleccion}`);
+            productos.forEach((item) => {
+                if (item.nombre == seleccion) item.nombre = nombre
+            })
+            alert('EL NOMBRE SE HA MODIFICADO CON EXITO')
+            volver(manipularProducto,seleccionManipular)
+            break;
+        case 2:
+            const precio = Number(prompt(`Ingrese el nuevo precio del producto ${seleccion}` ))
+            productos.forEach((item) => {
+                if (item.nombre == seleccion) item.precio = precio
+            })
+            alert('EL PRECIO SE HA MODIFICADO CON EXITO')
+            volver(manipularProducto,seleccionManipular)
+            break;
+        case 3:
+            const stock = Number(prompt(`Ingrese el nuevo stock del producto ${seleccion}` ))
+            productos.forEach((item) => {
+                if (item.nombre == seleccion) item.cantidad = stock
+            })
+            alert('EL STOCK SE HA MODIFICADO CON EXITO')
+            volver(manipularProducto,seleccionManipular)
+            break;    
+        default:
+            break;
+    }
+}
+
 //modifica productos cargados en el sistema
 const manipularProducto = (seleccionManipular) => {
     debugger
     if (seleccionManipular == 2) {
-                //Le indica que seleccione el nombre del producto a mdificar y luego se fija si existe en el array
+            //Le indica que seleccione el nombre del producto a mdificar y luego se fija si existe en el array
             const seleccion = prompt('Ingrese el nombre del producto que quiere modificar');
+   
             const existe = productos.some(item => item.nombre == seleccion)
-        
+ 
             //si existe le pide que ingrese por telcado que desea modificar de ese articulo, si no existe le pide 
             //nuevamente el ingreso correcto
             let respuesta;
+
             if (existe) {
                 respuesta = Number(prompt('Ingrese que desea modificar:\n1) Nombre\n2) Precio\n3) Stock'));
+            } else if (seleccion == null) {
+                tipoGestion()
+                return
             } else {
                 alert('EL NOMBRE INGRESADO NO EXISTE COMO PRODUCTO')
-                manipularProducto()
+                manipularProducto(seleccionManipular)
+                return
             }   
             
             
             //Verifica la respuesta del usuario y en base a eso ejecuta la intruccion indicada
-        switch (respuesta) {
-            case 1:
-                debugger
-                const nombre = prompt('Ingrese el nuevo nombre para el producto');
-
-                productos.forEach((item) => {
-                    if (item.nombre == seleccion) item.nombre = nombre
-                }) 
-
-                alert('El nombre se ha cambiado con exito')
-                volver(manipularProducto)
-                break;
-            case 2:
-                const precio = Number(prompt('Ingrese el nuevo precio del producto'))
-
-                productos.forEach((item) => {
-                    if (item.nombre == seleccion) item.precio = precio
-                }) 
-
-                alert('El precio se a modificado con exito')
-                volver(manipularProducto)
-                break;
-                
-            case 3:
-                const stock = Number(prompt('Ingrese el nuevo Stock del producto'))
-
-                productos.forEach((item) => {
-                    if (item.nombre == seleccion) item.stock = stock
-                }) 
-
-                alert('El stock se a modificado con exito')
-                volver(manipularProducto)
-                break
-            default:
-                alert('Seleccion de propiedad incorrecta')
-                manipularProducto()
-                break;
-        }
-    } else {
-
-        const seleccion = prompt('Ingrese el nombre del producto que quiere Eliminar');
-        const existe = productos.some(item => item.nombre == seleccion)
-    
-        if (existe) {
-            const lugar = productos.findIndex(item => item.nombre == seleccion);
-            productos.splice(lugar,1)
-            alert('EL PRODUCTO SE ELIMINO EN FORMA EXITOSA')
-            acumuladorId--
-            volver(manipularProducto)
+            if (respuesta > 3) {
+                alert('SELECCION DE PROPIEDAD INCORRECTA')
+                manipularProducto(seleccionManipular)
+                return
+            } else {
+                cargaExitosa(seleccion,respuesta,seleccionManipular)
+            }
         } else {
-            alert('EL NOMBRE INGRESADO NO EXISTE COMO PRODUCTO')
-            manipularProducto(seleccionManipular)
-        }   
+
+            const seleccion = prompt('Ingrese el nombre del producto que quiere Eliminar');
+            const existe = productos.some(item => item.nombre == seleccion)
         
+            if (existe) {
+                const lugar = productos.findIndex(item => item.nombre == seleccion);
+                productos.splice(lugar,1)
+                alert('EL PRODUCTO SE ELIMINO EN FORMA EXITOSA')
+                acumuladorId--
+                volver(manipularProducto,seleccionManipular)
+            } else {
+                alert('EL NOMBRE INGRESADO NO EXISTE COMO PRODUCTO')
+                manipularProducto(seleccionManipular)
+            }   
+            
+        }
     }
     
-
-    
-}
-
 /************************** EJECUCION ***************************** */ 
 
 alert('BIENVENIDO A LA GESTION DE CARGA DE PRODUCTOS')
