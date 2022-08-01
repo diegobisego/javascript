@@ -11,7 +11,7 @@ class Producto {
 
 /************************** ARRAYS ***************************** */ 
 
-
+//carga de objetos literales
 let productos = [
     {
         id:1,
@@ -36,15 +36,15 @@ let productos = [
 //Variables tipo array para guardar los productos
 let acumuladorId = 3
 // let carrito = []
-let comentarios = []
-let usuarios = []
+// let comentarios = []
+// let usuarios = []
 
 
 /************************** FUNCIONES ***************************** */ 
 
 //volver menu principal
 const volver = (fn, sel) => {
-    debugger
+    
     const respuesta = confirm('Confirme si desea volver a realizar el mismo procedimiento, \nen caso contrario cancele para volver al menu principal')
 
     seleccionFinal(respuesta,fn,sel)
@@ -55,7 +55,7 @@ const tipoGestion = () => {
 
     //consulta que tipo de gestion quiere realizar y luego lo verifica mediante un switch
     const seleccion = Number(prompt('A Continuacion, seleccione en numero, que desea realizar \n 1) Agregar un Producto \n 2) Modificar un Producto \n 3) Eliminar un Producto \n 4) Listar los Productos \n 5) Salir'))
-    debugger
+    
     if (seleccion < 1 || seleccion > 5 || isNaN(seleccion)) {
 
         alert('Se ingreso una opcion invalida');
@@ -85,7 +85,7 @@ const tipoGestion = () => {
 
 //ingresa un nuevo producto
 const ingresarProducto = () => {
-    debugger
+    
     const nombre = prompt('Ingrese el nombre del producto');
     const precio = Number(prompt('ingrese el precio del producto'));
     const cantidad = Number(prompt('Ingrese el stock del prducto'));
@@ -124,7 +124,7 @@ const ingresarProducto = () => {
 
 //realiza proceso de seleccion final segun la respueta del usuario
 const seleccionFinal = (bool,fn,sel) => {
-    debugger
+    
     if (bool) {
         fn(sel);
     } else {
@@ -134,7 +134,7 @@ const seleccionFinal = (bool,fn,sel) => {
 
 //lista productos cagados en el sistema
 const listarProducto = () => {
-    debugger
+    
     let listaProductos = []
     for (const i of productos) {
         listaProductos.push(`Nombre: ${i.nombre}  -- Precio: ${i.precio} -- Cantidad: ${i.cantidad} \n`);
@@ -143,8 +143,9 @@ const listarProducto = () => {
     tipoGestion()
 }
 
+//gestion de carga exitosa
 const cargaExitosa = (seleccion,respuesta,seleccionManipular) => {
-    debugger
+    
     switch (respuesta) {
         case 1:
             const nombre = prompt(`Ingrese el nuevo nombre para el producto ${seleccion}`);
@@ -177,7 +178,7 @@ const cargaExitosa = (seleccion,respuesta,seleccionManipular) => {
 
 //modifica productos cargados en el sistema
 const manipularProducto = (seleccionManipular) => {
-    debugger
+    
     if (seleccionManipular == 2) {
             //Le indica que seleccione el nombre del producto a mdificar y luego se fija si existe en el array
             const seleccion = prompt('Ingrese el nombre del producto que quiere modificar');
@@ -225,7 +226,7 @@ const manipularProducto = (seleccionManipular) => {
             }   
             
         }
-    }
+}
     
 /************************** EJECUCION ***************************** */ 
 
