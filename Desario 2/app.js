@@ -53,9 +53,10 @@ const volver = (fn) => {
 //seleccion tipo de gestion 
 const tipoGestion = () => {
 
-    const seleccion = Number(prompt('A Continuacion, seleccione en numero, que desea realizar \n 1) Agregar un Producto \n 2) Modificar un Producto \n 3) Listar los Productos \n 4) Salir'))
+    //consulta que tipo de gestion quiere realizar y luego lo verifica mediante un switch
+    const seleccion = Number(prompt('A Continuacion, seleccione en numero, que desea realizar \n 1) Agregar un Producto \n 2) Modificar un Producto \n 3) Eliminar un Producto \n 4) Listar los Productos \n 5) Salir'))
     debugger
-    if (seleccion < 1 || seleccion > 4 || isNaN(seleccion)) {
+    if (seleccion < 1 || seleccion > 5 || isNaN(seleccion)) {
 
         alert('Se ingreso una opcion invalida');
         tipoGestion();
@@ -67,12 +68,15 @@ const tipoGestion = () => {
                 ingresarProducto();
                 break;
             case 2:
-                modificarProducto();
+                manipularProducto(seleccion);
                 break;
             case 3:
+                manipularProducto(seleccion);
+                break;  
+            case 4:
                 listarProducto();
                 break;    
-            case 4:
+            case 5:
                 break;                  
         }  
     }
@@ -118,6 +122,7 @@ const seleccionFinal = (bool,fn) => {
     }
 }
 
+//lista productos cagados en el sistema
 const listarProducto = () => {
     debugger
     let listaProductos = []
@@ -128,63 +133,87 @@ const listarProducto = () => {
     tipoGestion()
 }
 
-const modificarProducto = () => {
+//modifica productos cargados en el sistema
+const manipularProducto = (seleccionManipular) => {
     debugger
-    //Le indica que seleccione el nombre del producto a mdificar y luego se fija si existe en el array
-    const seleccion = prompt('Ingrese el nombre del producto que quiere modificar');
-    const existe = productos.some(item => item.nombre == seleccion)
-  
-    //si existe le pide que ingrese por telcado que desea modificar de ese articulo, si no existe le pide 
-    //nuevamente el ingreso correcto
-    let respuesta;
-    if (existe) {
-        respuesta = Number(prompt('Ingrese que desea modificar:\n1) Nombre\n2) Precio\n3) Stock'));
-    } else {
-        alert('EL NOMBRE INGRESADO NO EXISTE COMO PRODUCTO')
-        modificarProducto()
-    }   
-    
-    
-    //Verifica la respuesta del usuario y en base a eso ejecuta la intruccion indicada
-   switch (respuesta) {
-    case 1:
-        debugger
-        const nombre = prompt('Ingrese el nuevo nombre para el producto');
-
-        productos.forEach((item) => {
-            if (item.nombre == seleccion) item.nombre = nombre
-        }) 
-
-        alert('El nombre se ha cambiado con exito')
-        volver(modificarProducto)
-        break;
-    case 2:
-        const precio = Number(prompt('Ingrese el nuevo precio del producto'))
-
-        productos.forEach((item) => {
-            if (item.nombre == seleccion) item.precio = precio
-        }) 
-
-        alert('El precio se a modificado con exito')
-        volver(modificarProducto)
-        break;
+    if (seleccionManipular == 2) {
+                //Le indica que seleccione el nombre del producto a mdificar y luego se fija si existe en el array
+            const seleccion = prompt('Ingrese el nombre del producto que quiere modificar');
+            const existe = productos.some(item => item.nombre == seleccion)
         
-    case 3:
-        const stock = Number(prompt('Ingrese el nuevo Stock del producto'))
+            //si existe le pide que ingrese por telcado que desea modificar de ese articulo, si no existe le pide 
+            //nuevamente el ingreso correcto
+            let respuesta;
+            if (existe) {
+                respuesta = Number(prompt('Ingrese que desea modificar:\n1) Nombre\n2) Precio\n3) Stock'));
+            } else {
+                alert('EL NOMBRE INGRESADO NO EXISTE COMO PRODUCTO')
+                manipularProducto()
+            }   
+            
+            
+            //Verifica la respuesta del usuario y en base a eso ejecuta la intruccion indicada
+        switch (respuesta) {
+            case 1:
+                debugger
+                const nombre = prompt('Ingrese el nuevo nombre para el producto');
 
-        productos.forEach((item) => {
-            if (item.nombre == seleccion) item.stock = stock
-        }) 
+                productos.forEach((item) => {
+                    if (item.nombre == seleccion) item.nombre = nombre
+                }) 
 
-        alert('El stock se a modificado con exito')
-        volver(modificarProducto)
-        break
-    default:
-        alert('Seleccion de propiedad incorrecta')
-        modificarProducto()
-        break;
-   }
+                alert('El nombre se ha cambiado con exito')
+                volver(manipularProducto)
+                break;
+            case 2:
+                const precio = Number(prompt('Ingrese el nuevo precio del producto'))
 
+                productos.forEach((item) => {
+                    if (item.nombre == seleccion) item.precio = precio
+                }) 
+
+                alert('El precio se a modificado con exito')
+                volver(manipularProducto)
+                break;
+                
+            case 3:
+                const stock = Number(prompt('Ingrese el nuevo Stock del producto'))
+
+                productos.forEach((item) => {
+                    if (item.nombre == seleccion) item.stock = stock
+                }) 
+
+                alert('El stock se a modificado con exito')
+                volver(manipularProducto)
+                break
+            default:
+                alert('Seleccion de propiedad incorrecta')
+                manipularProducto()
+                break;
+        }
+    } else {
+
+        const seleccion = prompt('Ingrese el nombre del producto que quiere Eliminar');
+        const existe = productos.some(item => item.nombre == seleccion)
+    
+        if (existe) {
+            const lugar = productos.findIndex(item => item.nombre == seleccion);
+            productos.splice(lugar,1)
+            alert('EL PRODUCTO SE ELIMINO EN FORMA EXITOSA')
+            volver(manipularProducto)
+        } else {
+            alert('EL NOMBRE INGRESADO NO EXISTE COMO PRODUCTO')
+            manipularProducto(seleccionManipular)
+        }   
+        
+    }
+    
+
+    
+}
+
+//elimina productos cargados en el sistema
+const eliminarProducto = () => {
     
 }
 
