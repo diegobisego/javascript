@@ -90,26 +90,36 @@ const ingresarProducto = () => {
     const precio = Number(prompt('ingrese el precio del producto'));
     const cantidad = Number(prompt('Ingrese el stock del prducto'));
 
-    const existe = productos.some(item => item.nombre == nombre)
+    //verifica que tanto precio como cantidad sean ingresos correctos
+        if (isNaN(precio) || isNaN(cantidad) || nombre == "" || !isNaN(nombre)) {
+            alert('HA INGRESADO UN PRECIO O CANTIDAD INVALIDO')
+            ingresarProducto()
+        } else {
+            const existe = productos.some(item => item.nombre == nombre)
 
-    if (existe) {
-        alert('EL PRODUCTO QUE QUIERE CARGAR YA SE ENCUENTRA EN LA BASE DE DATOS')
-        ingresarProducto()
-    } else {
-        acumuladorId++
+        if (existe) {
+            alert('EL PRODUCTO QUE QUIERE CARGAR YA SE ENCUENTRA EN LA BASE DE DATOS')
+            ingresarProducto()
+        } else {
 
-    const nuevoProdcuto = new Producto;
+            //acumulador de ID de item
+            acumuladorId++
 
-    nuevoProdcuto.id = acumuladorId
-    nuevoProdcuto.nombre = nombre;
-    nuevoProdcuto.precio = precio;
-    nuevoProdcuto.cantidad = cantidad;
+        const nuevoProdcuto = new Producto;
 
-    productos.push(nuevoProdcuto);
+        nuevoProdcuto.id = acumuladorId
+        nuevoProdcuto.nombre = nombre;
+        nuevoProdcuto.precio = precio;
+        nuevoProdcuto.cantidad = cantidad;
 
-    alert('PRODUCTO CARGADO CON EXITO')
-    volver(ingresarProducto)   
-    }    
+        productos.push(nuevoProdcuto);
+
+        alert('PRODUCTO CARGADO CON EXITO')
+        volver(ingresarProducto)   
+        }    
+    }
+
+        
 }
 
 //realiza proceso de seleccion final segun la respueta del usuario
@@ -200,6 +210,7 @@ const manipularProducto = (seleccionManipular) => {
             const lugar = productos.findIndex(item => item.nombre == seleccion);
             productos.splice(lugar,1)
             alert('EL PRODUCTO SE ELIMINO EN FORMA EXITOSA')
+            acumuladorId--
             volver(manipularProducto)
         } else {
             alert('EL NOMBRE INGRESADO NO EXISTE COMO PRODUCTO')
@@ -209,11 +220,6 @@ const manipularProducto = (seleccionManipular) => {
     }
     
 
-    
-}
-
-//elimina productos cargados en el sistema
-const eliminarProducto = () => {
     
 }
 
