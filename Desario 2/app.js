@@ -35,7 +35,7 @@ let productos = [
 
 //Variables tipo array para guardar los productos
 let acumuladorId = 3
-let carrito = []
+// let carrito = []
 let comentarios = []
 let usuarios = []
 
@@ -84,9 +84,15 @@ const ingresarProducto = () => {
     debugger
     const nombre = prompt('Ingrese el nombre del producto');
     const precio = Number(prompt('ingrese el precio del producto'));
-    const cantidad = prompt('Ingrese el stock del prducto');
+    const cantidad = Number(prompt('Ingrese el stock del prducto'));
 
-    acumuladorId++
+    const existe = productos.some(item => item.nombre == nombre)
+
+    if (existe) {
+        alert('EL PRODUCTO QUE QUIERE CARGAR YA SE ENCUENTRA EN LA BASE DE DATOS')
+        ingresarProducto()
+    } else {
+        acumuladorId++
 
     const nuevoProdcuto = new Producto;
 
@@ -99,6 +105,7 @@ const ingresarProducto = () => {
 
     alert('PRODUCTO CARGADO CON EXITO')
     volver(ingresarProducto)   
+    }    
 }
 
 //realiza proceso de seleccion final segun la respueta del usuario
@@ -123,55 +130,54 @@ const listarProducto = () => {
 
 const modificarProducto = () => {
     debugger
+    //Le indica que seleccione el nombre del producto a mdificar y luego se fija si existe en el array
     const seleccion = prompt('Ingrese el nombre del producto que quiere modificar');
-    const respuesta = Number(prompt('Ingrese que desea modificar:\n1) Nombre\n2) Precio\n3) Stock'));
+    const existe = productos.some(item => item.nombre == seleccion)
+  
+    //si existe le pide que ingrese por telcado que desea modificar de ese articulo, si no existe le pide 
+    //nuevamente el ingreso correcto
+    let respuesta;
+    if (existe) {
+        respuesta = Number(prompt('Ingrese que desea modificar:\n1) Nombre\n2) Precio\n3) Stock'));
+    } else {
+        alert('EL NOMBRE INGRESADO NO EXISTE COMO PRODUCTO')
+        modificarProducto()
+    }   
     
-
+    
+    //Verifica la respuesta del usuario y en base a eso ejecuta la intruccion indicada
    switch (respuesta) {
     case 1:
+        debugger
         const nombre = prompt('Ingrese el nuevo nombre para el producto');
-        productos.map = (nombre) =>{
 
-        }
-        for (const i of productos) {
-            if (i.nombre == seleccion) {
-                i.nombre = nombre;
-                alert('El nombre se ha cambiado con exito')
-                volver(modificarProducto)
-                break
-            } else {
-                alert('El nombre seleccionado no se encuentra dentro de la lista')
-                modificarProducto()
-            }
-        }
+        productos.forEach((item) => {
+            if (item.nombre == seleccion) item.nombre = nombre
+        }) 
+
+        alert('El nombre se ha cambiado con exito')
+        volver(modificarProducto)
         break;
     case 2:
         const precio = Number(prompt('Ingrese el nuevo precio del producto'))
-        for (const i of productos) {
-            if (i.nombre == seleccion) {
-                i.precio = precio;
-                alert('El precio se a modificado con exito')
-                volver(modificarProducto)
-                break
-            } else {
-                alert('El nombre seleccionado no se encuentra dentro de la lista')
-                modificarProducto()
-            }
-        }
-        break
+
+        productos.forEach((item) => {
+            if (item.nombre == seleccion) item.precio = precio
+        }) 
+
+        alert('El precio se a modificado con exito')
+        volver(modificarProducto)
+        break;
+        
     case 3:
         const stock = Number(prompt('Ingrese el nuevo Stock del producto'))
-        for (const i of productos) {
-            if (i.nombre == seleccion) {
-                i.stock = stock;
-                alert('El stock se ha modificado con exito')
-                volver(modificarProducto)
-                break
-            } else {
-                alert('El nombre seleccionado no se encuentra dentro de la lista')
-                modificarProducto()
-            }
-        }
+
+        productos.forEach((item) => {
+            if (item.nombre == seleccion) item.stock = stock
+        }) 
+
+        alert('El stock se a modificado con exito')
+        volver(modificarProducto)
         break
     default:
         alert('Seleccion de propiedad incorrecta')
