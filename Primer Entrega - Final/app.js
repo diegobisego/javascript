@@ -26,7 +26,7 @@ class Producto {
   
   /************************** FUNCION AGREGAR PRODUCTO ***************************** */
   const ingresarProducto = () => {
-	debugger
+	
 	let flagIngresarProducto = true
   
 	while (flagIngresarProducto) {
@@ -66,13 +66,13 @@ class Producto {
   };
   
   
-  /************************** FUNCION MANIPULAR PRODUCTO ***************************** */
+  /************************** FUNCIONES MANIPULAR PRODUCTO ***************************** */
   
-  
+  //array de comparacion
   let arrModificar = ['nombre','precio','stock']
   
   const seleccionCarga = (seleccion,arrModificar,respuesta) => {
-	debugger
+	
 	let nuevo;
 	if (respuesta == 2 || respuesta == 3) {
 		nuevo = Number(prompt(`Ingrese el nuevo ${arrModificar[respuesta-1]} para el producto ${seleccion}`));
@@ -81,7 +81,7 @@ class Producto {
 	}
 
 	productos.forEach((item) => {
-		debugger
+		
 		if (item[arrModificar[0]] == seleccion) item[arrModificar[respuesta-1]] = nuevo;
 	  });
   
@@ -91,7 +91,7 @@ class Producto {
   }
   
   const manipularProducto = (seleccionManipular) => {
-	debugger 
+	 
 	while (flagManipularProducto) {
   
 	  if (seleccionManipular == 2) {
@@ -141,48 +141,10 @@ class Producto {
 		}
 	  }
 	}
-  };
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  //volver menu principal
-  const volver = (fn, sel) => {
-	const respuesta = confirm(
-	  "Confirme si desea volver a realizar el mismo procedimiento, \nen caso contrario cancele para volver al menu principal"
-	);
-  
-	seleccionFinal(respuesta, fn, sel);
-  };
-  
-  
-  
-  
-  
-  //realiza proceso de seleccion final segun la respueta del usuario
-  const seleccionFinal = (bool, fn, sel) => {
-	if (bool) {
-	  fn(sel);
-	} else {
-	  return;
-	}
-  };
-  
-  //lista productos cagados en el sistema
+  };  
+ 
+ /************************** FUNCION LISTAR PRODUCTO ***************************** */
+
   const listarProducto = () => {
 	let listaProductos = [];
 	for (const i of productos) {
@@ -191,35 +153,7 @@ class Producto {
 	alert(`La lista de productos actual es: \n ${listaProductos}`);
 	return;
   };
-  
-  
-  
-  
-  
-//   //gestion de carga exitosa REVISAR ESTO
-//   const cargaExitosa = (seleccion, respuesta, seleccionManipular) => {
-// 	  debugger
-// 	switch (respuesta) {
-// 	  case 1:
-// 		  seleccionCarga(seleccion,'nombre',seleccionManipular);
-// 		break;
-  
-// 	  case 2:
-// 		  seleccionCarga(seleccion,'precio',seleccionManipular);
-// 		break;
-  
-// 	  case 3:
-// 		  seleccionCarga(seleccion,'stock',seleccionManipular);
-// 		break;
-  
-// 	  default:
-// 		break;
-// 	}
-//   };
-  
-  //modifica productos cargados en el sistema
-  
-  
+
   /************************** PRIMERA EJECUCION ***************************** */
   
   alert("BIENVENIDO A LA GESTION DE CARGA DE PRODUCTOS");
@@ -230,7 +164,6 @@ class Producto {
 	
 	if (seleccion < 1 || seleccion > 5 || isNaN(seleccion)) {
 	  alert("Se ingreso una opcion invalida");
-	  break
 	} else {
 	  switch (seleccion) {
 		case 1:
@@ -248,12 +181,9 @@ class Producto {
 		  listarProducto();
 		  break;
 		default:
+			alert("FIN DEL PROGRAMA");
+			flagPrincipal = false
 		  break;
 	  }
 	}
-  }
-  
-  
-  
-  alert("FIN DEL PROGRAMA");
-  
+  } 
