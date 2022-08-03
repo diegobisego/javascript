@@ -68,6 +68,92 @@ const ingresarProducto = () => {
 };
 
 
+/************************** FUNCION MANIPULAR PRODUCTO ***************************** */
+
+
+let respuestasModificar = ['nombre','precio','stock']
+
+const seleccionCarga = (seleccion,prop,respuesta) => {
+  debugger
+  const nuevo = prompt(`Ingrese el nuevo ${prop[respuesta-1]} para el producto ${seleccion}`);
+  productos.forEach((item) => {
+      if (item.prop[respuesta-1] == seleccion) item.prop[respuesta-1] = nuevo;
+    });
+
+  alert(`El ${prop} se ha modificado con exito`);
+  flagManipularProducto = false;
+}
+
+const manipularProducto = (seleccionManipular) => {
+  debugger
+
+  let flagManipularProducto = true;
+
+  while (flagManipularProducto) {
+
+    if (seleccionManipular == 2) {
+      //Le indica que seleccione el nombre del producto a mdificar y luego se fija si existe en el array
+      const seleccion = prompt("Ingrese el nombre del producto que quiere modificar");
+      const existe = productos.some((item) => item.nombre == seleccion);
+    
+      //si existe le pide que ingrese por telcado que desea modificar de ese articulo, si no existe le pide
+      //nuevamente el ingreso correcto
+      let respuesta;
+    
+      if (existe) {
+        respuesta = Number(prompt("Ingrese que desea modificar:\n1) Nombre\n2) Precio\n3) Stock"));
+      } else if (seleccion == null) {
+        return;
+      } else {
+        alert("EL NOMBRE INGRESADO NO EXISTE COMO PRODUCTO");
+        flagManipularProducto = false;
+        break
+      }
+    
+      //Verifica la respuesta del usuario y en base a eso ejecuta la intruccion indicada
+      if (respuesta > 3) {
+        alert("SELECCION DE PROPIEDAD INCORRECTA");
+      } else {
+        seleccionCarga(seleccion,respuestasModificar, respuesta);
+      }
+    } else {
+      const seleccion = prompt("Ingrese el nombre del producto que quiere Eliminar");
+      const existe = productos.some((item) => item.nombre == seleccion);
+    
+      if (existe) {
+
+        const lugar = productos.findIndex((item) => item.nombre == seleccion);
+
+        productos.splice(lugar, 1);
+
+        alert("EL PRODUCTO SE ELIMINO EN FORMA EXITOSA");
+        acumuladorId--;
+        flagManipularProducto = false;
+        break
+
+      } else {
+        alert("EL NOMBRE INGRESADO NO EXISTE COMO PRODUCTO");
+        flagManipularProducto = false;
+      }
+    }
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //volver menu principal
@@ -102,18 +188,9 @@ const listarProducto = () => {
   return;
 };
 
-let respuestasModificar = ['nombre','precio','stock']
 
-const seleccionCarga = (seleccion,prop,fn,respuesta) => {
-    debugger
-    const nuevo = prompt(`Ingrese el nuevo ${prop} para el producto ${seleccion}`);
-    productos.forEach((item) => {
-        if (item.respuestasModificar[respuesta-1] == seleccion) item.respuestasModificar[respuesta-1] = nuevo;
-      });
 
-    alert(`${prop} se ha modificado con exito`);
-    volver(manipularProducto, fn);
-}
+
 
 //gestion de carga exitosa REVISAR ESTO
 const cargaExitosa = (seleccion, respuesta, seleccionManipular) => {
@@ -137,52 +214,7 @@ const cargaExitosa = (seleccion, respuesta, seleccionManipular) => {
 };
 
 //modifica productos cargados en el sistema
-const manipularProducto = (seleccionManipular) => {
-    debugger
-  if (seleccionManipular == 2) {
-    //Le indica que seleccione el nombre del producto a mdificar y luego se fija si existe en el array
-    const seleccion = prompt("Ingrese el nombre del producto que quiere modificar");
 
-    const existe = productos.some((item) => item.nombre == seleccion);
-
-    //si existe le pide que ingrese por telcado que desea modificar de ese articulo, si no existe le pide
-    //nuevamente el ingreso correcto
-    let respuesta;
-
-    if (existe) {
-      respuesta = Number(prompt("Ingrese que desea modificar:\n1) Nombre\n2) Precio\n3) Stock"));
-    } else if (seleccion == null) {
-      return;
-    } else {
-      alert("EL NOMBRE INGRESADO NO EXISTE COMO PRODUCTO");
-      manipularProducto(seleccionManipular);
-      return;
-    }
-
-    //Verifica la respuesta del usuario y en base a eso ejecuta la intruccion indicada
-    if (respuesta > 3) {
-      alert("SELECCION DE PROPIEDAD INCORRECTA");
-      manipularProducto(seleccionManipular);
-      return;
-    } else {
-      cargaExitosa(seleccion, respuesta, seleccionManipular);
-    }
-  } else {
-    const seleccion = prompt("Ingrese el nombre del producto que quiere Eliminar");
-    const existe = productos.some((item) => item.nombre == seleccion);
-
-    if (existe) {
-      const lugar = productos.findIndex((item) => item.nombre == seleccion);
-      productos.splice(lugar, 1);
-      alert("EL PRODUCTO SE ELIMINO EN FORMA EXITOSA");
-      acumuladorId--;
-      volver(manipularProducto, seleccionManipular);
-    } else {
-      alert("EL NOMBRE INGRESADO NO EXISTE COMO PRODUCTO");
-      return;
-    }
-  }
-};
 
 /************************** PRIMERA EJECUCION ***************************** */
 
