@@ -159,7 +159,6 @@ class Producto {
   alert("BIENVENIDO A LA GESTION DE CARGA DE PRODUCTOS");
   
   while (flagPrincipal) {
-	debugger
 	const seleccion = Number(prompt("A Continuacion, seleccione en forma numerica, que desea realizar \n 1 - Agregar un Producto \n 2 - Modificar un Producto \n 3 - Eliminar un Producto \n 4 - Listar los Productos \n 5 - Salir"));
 	
 	if (seleccion < 1 || seleccion > 5 || isNaN(seleccion)) {
