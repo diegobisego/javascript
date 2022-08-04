@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carga de Productos</title>
+    <!-- link bootswach -->
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/5/darkly/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Distribuidora</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarColor01"
+          aria-controls="navbarColor01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#"
+                >Inicio
+                <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Lista de Precios</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="#">Login</a>
+            </li>            
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- formulario -->
+    <main class="conteiner d-flex justify-content-center">
+       
+        <div class="form-group d-grid col-md-4 col-lg-12 justify-content-center align-content-center border w-25 p-3" id="registro">
+            <h4 class="">INGRESO DE PRODUCTOS</h4>
+            <label class="col-form-label mt-4" for="inputDefault">Nombre
+                <input type="text" class="form-control" placeholder="Nombre" id="inputDefault">
+            </label>
+            <label class="col-form-label mt-4" for="inputDefault">Precio
+                <input type="text" class="form-control" placeholder="Precio" id="inputDefault">
+            </label>
+            <label class="col-form-label mt-4" for="inputDefault">Stock
+                <input type="text" class="form-control" placeholder="Stock" id="inputDefault">
+            </label>
+            <label class="col-form-label mt-4" for="inputDefault">Tipo de Prodcuto
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Tipo de Producto</option>
+                    <option value="1">Aceite</option>
+                    <option value="2">Aceituna</option>
+                    <option value="3">Vinagre</option>
+                    <option value="3">Huevo</option>
+                  </select>
+            </label>
+
+            <button type="submit" class="btn btn-primary" id="btn-carga">Ingresar Producto</button>
+
+        </div>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>

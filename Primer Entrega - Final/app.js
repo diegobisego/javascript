@@ -20,7 +20,6 @@ class Producto {
   /************************** VARIABLES ***************************** */
   let acumuladorId = 3;
   let flagPrincipal = true;
-  let flagVolver = true;
   
   
   
