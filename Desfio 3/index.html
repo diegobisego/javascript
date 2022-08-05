@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <main class="container text-center">
+        <div class="row justify-content-center">
+            <div class="d-grid gap-3 col-sm-4 bg-light shadow-lg p-3 mb-5 mt-5 bg-body rounded border border-2">
+                <h1 class="fs-4 fw-light">CARGA DE PRODUCTOS</h1>
+                <form action="">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label mt-3">Tipo
+                            <select name="" id="selTipo" class="form-select mt-2 text-center" aria-label="Default select example">
+                                <option selected>Seleecione una opcion</option>
+                                <option value="1">Aceite Girasol</option>
+                                <option value="2">Aceite Oliva</option>
+                                <option value="3">Aceituna Nº 0</option>
+                                <option value="4">Aceituna Nº 2</option>
+                                <option value="5">Aceituna Negra</option>
+                                <option value="6">Aceituna Fileteada</option>
+                                <option value="7">Vinagre</option>
+                                <option value="8">Huevo</option>
+                                <option value="9">Pasa de Uva</option>
+                                <option value="10">Morrones</option>
+                                <option value="11">Aji Cayena</option>
+                                <option value="12">Cond. Para Pizza</option>
+                                <option value="13">Cond. Para Carne</option>
+                                <option value="14">Pimienta Negra</option>
+                                <option value="15">Pimienta Blanca</option>
+                                <option value="16">Comino</option>
+                                <option value="17">Oregano</option>
+                                <option value="18">Pimenton</option>
+                                <option value="19">Bicarbonato</option>
+                                <option value="20">Chimichurri</option>
+                                <option value="21">Curcuma</option>
+                                <option value="22">Perejil</option>
+                                <option value="23">Provenzal</option>
+                                <option value="24">Nuez Moscada</option>
+                                <option value="25">Primenton</option>
+                                <option value="26">Clavo de Olor</option>
+                            </select>
+                        </label>
+                        <label for="exampleInputEmail1" class="form-label mt-3 ">Tamaño / Peso
+                            <select class="form-select text-center mt-2" aria-label="Default select example" id="selTamPeso">
+                                <option selected>Seleecione una opcion</option>
+                                <option value="1">800 Gms.</option>
+                                <option value="2">1 Kg.</option>
+                                <option value="3">2 Kgs.</option>
+                                <option value="3">5 kgs.</option>
+                                <option value="4">1 Lt.</option>
+                                <option value="5">2 Lts.</option>
+                                <option value="6">5 Lts.</option>
+                                <option value="7">10 Lts.</option>
+                                <option value="8">20 Lts.</option>
+                                <option value="9">Medianos</option>
+                                <option value="10">Grandes Color</option>
+                                <option value="11">Grandes Blancos</option>
+                              </select>
+                        </label>
+                        <label for="exampleInputEmail1" class="form-label mt-3">Precio
+                            <input type="number" class="form-control mt-2 text-center" id="inPrecio" aria-describedby="precio">
+                        </label>
+                        <label for="exampleInputEmail1" class="form-label mt-3">Stock
+                            <input type="number" class="form-control mt-2 text-center" id="inStock" aria-describedby="stock">
+                        </label>
+                        <button type="submit" class="btn btn-primary mt-5" id="btn-carga">Ingresar Producto</button>
+                      </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    
+    <!-- js -->
+    <script src="./app.js"></script>
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
