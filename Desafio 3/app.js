@@ -122,3 +122,10 @@ const mensajeCarga = (mensaje, tipo) => {
   div.innerHTML = '<div class="alert alert-' + tipo + ' alert-dismissible" role="alert">' + mensaje + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
   alertPlaceholder.append(div)
 }
+
+
+//remover fila
+const deleteRow = (btn) => {
+  const row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
