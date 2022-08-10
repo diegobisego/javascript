@@ -1,7 +1,5 @@
-
-debugger
 /************************** CLASE ***************************** */
-
+//clase
 class Producto {
     constructor(id, tipo, tamanio, precio,stock) {
         (this.id = id),
@@ -50,10 +48,12 @@ class Producto {
   
   /************************** ARRAYS DESDE STORAGE ***************************** */
 
+//recupero del local por el cambio de pagina a lista de precios
 let productos = localStorage.getItem('productos');
 let contador = localStorage.getItem('contador')
 
-if (productos == null) {
+//veridfico si existe contador y array, sino los cargo desde el local
+if (productos == null) {  
   productos = [];
   contador = 0
 } else {
@@ -65,42 +65,73 @@ if (productos == null) {
 
   /************************** DOM ***************************** */
  
-
+//recupero el boton cargar producto
 const boton = document.querySelector('#btn-carga');
 
+//evento de boton
 boton.addEventListener('click', () => {
+
+  //evito el reinicio de la pagina
   const form = document.querySelector('#form');
   form.addEventListener('submit', (e) =>{
     e.preventDefault()
-  })
-    
-  const tipoProducto = document.querySelector('#selTipo');
-  const tipoTamPeso = document.querySelector('#selTamPeso');
-  const precio = Number(document.querySelector('#inPrecio').value);
-  const stock = Number(document.querySelector('#inStock').value);
+  })  
 
-  const selTipoProducto = tipoProducto.options[tipoProducto.selectedIndex].text;
-  const selTipoTamPeso = tipoTamPeso.options[tipoTamPeso.selectedIndex].text;
-  contador++
+  //Verifico si el array esta vacio, se llena
+  if (productos == "") {
+    nuevoProducto() 
+    return
+  }
   
-  const nuevoProducto = new Producto(contador,selTipoProducto,selTipoTamPeso,precio,stock)
-  productos.push(nuevoProducto);  
-
-  localStorage.setItem('productos',JSON.stringify(productos));
-  localStorage.setItem('contador',contador);
-
-  //reseteo el formulario
-  form.reset()
-
-  //muestro mensaje de exito de carga que se cierra en 2 segundos
-  mensajeCarga('Producto cargado con exito!', 'success')
-  setTimeout(() => div.parentNode.removeChild(div),2000) 
-
+  //verifico que no cargue 2 veces el mismo producto, sino lo cargo
+  for (const key in productos) {
+    if (productos[key].tipo == selTipoProducto) {
+      mensajeCarga('El Producto que desea cargar ya se encuentra en la lista!', 'danger')
+      setTimeout(() => div.parentNode.removeChild(div),2000)
+      form.reset()
+      contador--
+      break            
+    } else {
+      nuevoProducto()
+    }    
+  }
 });
 
 
   /************************** FUNCIONES ADICIONALES ***************************** */
  
+
+
+  const nuevoProducto = () => {
+    
+    //traigo por dom todos los textbox y select
+    const tipoProducto = document.querySelector('#selTipo');
+    const tipoTamPeso = document.querySelector('#selTamPeso');
+    const precio = Number(document.querySelector('#inPrecio').value);
+    const stock = Number(document.querySelector('#inStock').value);
+
+    //traigo los textos de los select
+    const selTipoProducto = tipoProducto.options[tipoProducto.selectedIndex].text;
+    const selTipoTamPeso = tipoTamPeso.options[tipoTamPeso.selectedIndex].text;
+
+    //contador de ID
+    contador++
+
+    //creo y apencheo el producto al array
+    const nuevoProducto = new Producto(contador,selTipoProducto,selTipoTamPeso,precio,stock)
+    productos.push(nuevoProducto);  
+  
+    //Cargo el nuevo array al local junto con el contador
+    localStorage.setItem('productos',JSON.stringify(productos));
+    localStorage.setItem('contador',contador);
+  
+    //reseteo el formulario
+    form.reset()
+  
+    //muestro mensaje de exito de carga que se cierra en 2 segundos
+    mensajeCarga('Producto cargado con exito!', 'success')
+    setTimeout(() => div.parentNode.removeChild(div),2000) 
+  }
 
 //creacion y declaracion de funcion para mensaje de exito
 const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
