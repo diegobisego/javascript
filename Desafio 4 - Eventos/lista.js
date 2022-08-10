@@ -21,12 +21,13 @@ productos.forEach((elem) => {
 //remover fila
 const deleteRow = (btn) => {
     const row = btn.parentNode.parentNode;
-    let texto = row.children[0].innerText
+    let tipo = row.children[0].innerText
+    let tamanio = row.children[1].innerText
     row.parentNode.removeChild(row);
 
     //busca por nombre de producto dentro del array y lo elimina
     for (const key in productos) {
-        if (productos[key].tipo == texto) {
+        if (productos[key].tipo == tipo && productos[key].tamanio == tamanio) {
             productos.splice(key,1)            
         }
     }
