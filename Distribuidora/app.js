@@ -1,7 +1,5 @@
-
-
 /************************** CLASE ***************************** */
-
+//clase
 class Producto {
     constructor(id, tipo, tamanio, precio,stock) {
         (this.id = id),
@@ -13,115 +11,132 @@ class Producto {
     
     // getters y setters
 
-    getTipo= () => {
-      return this.tipo
-    }
+    // getTipo= () => {
+    //   return this.tipo
+    // }
 
-    setTipo = (t) => {
-      this.tipo = t;
-    }
+    // setTipo = (t) => {
+    //   this.tipo = t;
+    // }
 
-    getTamanio = () => {
-      return this.tamanio
-    }
+    // getTamanio = () => {
+    //   return this.tamanio
+    // }
 
-    setTamanio = (t) => {
-      this.tamanio = t;
-    }
+    // setTamanio = (t) => {
+    //   this.tamanio = t;
+    // }
 
-    getPrecio= () => {
-      return this.precio
-    }
+    // getPrecio= () => {
+    //   return this.precio
+    // }
 
-    setPrecio = (p) => {
-      this.precio = n;
-    }
+    // setPrecio = (p) => {
+    //   this.precio = n;
+    // }
 
-    getStock = () => {
-      return this.stock
-    }
+    // getStock = () => {
+    //   return this.stock
+    // }
 
-    setStock = (s) => {
-      this.stock = s;
-    }
+    // setStock = (s) => {
+    //   this.stock = s;
+    // }
 
  
   }
-  
-  /************************** ARRAYS ***************************** */
-  
-let productos = [];
-let contador = 0
+  /************************** ARRAYS DESDE STORAGE ***************************** */
+
+//recupero del local por el cambio de pagina a lista de precios
+let productos = localStorage.getItem('productos');
+let contador = localStorage.getItem('contador')
+
+//veridfico si existe contador y array, sino los cargo desde el local
+if (productos == null) {  
+  productos = [];
+  contador = 0
+} else {
+  productos = JSON.parse(localStorage.getItem('productos'));
+  contador = JSON.parse(localStorage.getItem('contador'));
+}  
+ 
 
 
   /************************** DOM ***************************** */
  
-
+//recupero el boton cargar producto
 const boton = document.querySelector('#btn-carga');
 
+//evento de boton
 boton.addEventListener('click', () => {
-    
+  //evito el reinicio de la pagina
   const form = document.querySelector('#form');
   form.addEventListener('submit', (e) =>{
     e.preventDefault()
-  })
-    
+  })  
+
+
+  //traigo por dom todos los textbox y select
   const tipoProducto = document.querySelector('#selTipo');
   const tipoTamPeso = document.querySelector('#selTamPeso');
   const precio = Number(document.querySelector('#inPrecio').value);
   const stock = Number(document.querySelector('#inStock').value);
 
+  //traigo los textos de los select
   const selTipoProducto = tipoProducto.options[tipoProducto.selectedIndex].text;
   const selTipoTamPeso = tipoTamPeso.options[tipoTamPeso.selectedIndex].text;
-  contador++
 
-  const nuevoProducto = new Producto(contador,selTipoProducto,selTipoTamPeso,precio,stock)
-  productos.push(nuevoProducto);
-
-  const divLista = document.querySelector('#lista')
-  const temp = document.querySelector('#temp-productos')
-  const lsProduct = temp.content.querySelector('#tr-list')
-
-  let prodClone
+  //Verifico si el array esta vacio, se llena
+  if (productos == "") {
+    nuevoProducto(selTipoProducto,selTipoTamPeso,precio,stock) 
+  }
   
-  productos.forEach((elem) => {
-      prodClone = lsProduct.cloneNode(lsProduct,true);
-      prodClone.children[0].innerText = elem.tipo
-      prodClone.children[1].innerText = elem.tamanio
-      prodClone.children[2].innerText = elem.precio
-      prodClone.children[3].innerText = elem.stock
+  //verifico que no cargue 2 veces el mismo producto, sino lo cargo
   
-      
-  })
-
-  divLista.appendChild(prodClone)
-
+  for (const key in productos) {
+    if (productos[key].tipo == selTipoProducto && productos[key].tamanio == selTipoTamPeso) {
+      mensajeCarga('El Producto que desea cargar ya se encuentra en la lista!', 'danger')
+      setTimeout(() => div.parentNode.removeChild(div),2000)
+      form.reset()
+      return            
+    }
+  }
+  nuevoProducto(selTipoProducto,selTipoTamPeso,precio,stock);
 });
 
-// let objeto = [{
-//     id:1,
-//     tipo: 'blsdadsadsdsadasdasdsadsaanco',
-//     tamanio: '34',
-//     precio: 324,
-//     stock: 4553
-// }]
 
-// const cambio = document.querySelector('#cambio-listar-productos')
+  /************************** FUNCIONES ADICIONALES ***************************** */
+ 
 
 
-// cambio.addEventListener('click', () => {
-//     debugger
-//     const divLista = document.querySelector('#lista')
-//     const temp = document.querySelector('#temp-productos')
-//     const lsProduct = temp.content.querySelector('#tr-list')
-    
-//     objeto.forEach((elem) => {
-//         let prodClone = lsProduct.cloneNode(lsProduct,true);
-//         prodClone.children[0].innerText = elem.tipo
-//         prodClone.children[1].innerText = elem.tamanio
-//         prodClone.children[2].innerText = elem.precio
-//         prodClone.children[3].innerText = elem.stock
-    
-//         divLista.appendChild(prodClone)
-//     })
-// })
+  const nuevoProducto = (selTipoProducto,selTipoTamPeso,precio,stock) => {
+    //contador de ID
+    contador++
+
+    //creo y apencheo el producto al array
+    const nuevoProducto = new Producto(contador,selTipoProducto,selTipoTamPeso,precio,stock)
+    productos.push(nuevoProducto);  
+  
+    //Cargo el nuevo array al local junto con el contador
+    localStorage.setItem('productos',JSON.stringify(productos));
+    localStorage.setItem('contador',contador);
+  
+    //reseteo el formulario
+    form.reset()
+  
+    //muestro mensaje de exito de carga que se cierra en 2 segundos
+    mensajeCarga('Producto cargado con exito!', 'success')
+    setTimeout(() => div.parentNode.removeChild(div),2000) 
+    return
+  }
+
+//creacion y declaracion de funcion para mensaje de exito
+const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+const div = document.createElement('div')
+
+const mensajeCarga = (mensaje, tipo) => {  
+  div.innerHTML = '<div class="alert alert-' + tipo + ' alert-dismissible" role="alert">' + mensaje + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+  alertPlaceholder.append(div)
+}
+
+
