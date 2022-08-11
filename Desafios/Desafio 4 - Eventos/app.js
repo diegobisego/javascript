@@ -70,7 +70,7 @@ const boton = document.querySelector('#btn-carga');
 
 //evento de boton
 boton.addEventListener('click', () => {
-  debugger
+  
   //evito el reinicio de la pagina
   const form = document.querySelector('#form');
   form.addEventListener('submit', (e) =>{
@@ -90,7 +90,8 @@ boton.addEventListener('click', () => {
 
   //Verifico si el array esta vacio, se llena
   if (productos == "") {
-    nuevoProducto(selTipoProducto,selTipoTamPeso,precio,stock) 
+    nuevoProducto(selTipoProducto,selTipoTamPeso,precio,stock)
+    return 
   }
   
   //verifico que no cargue 2 veces el mismo producto, sino lo cargo
