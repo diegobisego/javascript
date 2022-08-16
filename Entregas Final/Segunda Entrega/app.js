@@ -2,11 +2,11 @@
 //clase
 class Producto {
     constructor(id, tipo, tamanio, precio,stock) {
-        (this.id = id),
+        (this.id = Number(id)),
         (this.tipo = tipo),
         (this.tamanio = tamanio),
-        (this.precio = precio),
-        (this.stock = stock);
+        (this.precio = Number(precio)),
+        (this.stock = Number(stock));
     }
     
     // getters y setters
@@ -74,10 +74,11 @@ for (const i of tamTipo) {
 
 //recupero del local por el cambio de pagina a lista de precios
 let productos = JSON.parse(localStorage.getItem('productos'));
+let contador = JSON.parse(localStorage.getItem('contador'));
 
 
 //veridfico si existe contador y array, sino los cargo desde el local
-if (productos == null) {  
+if (productos == null || productos == "") {  
   productos = [];
   contador = 0
 }
@@ -89,19 +90,18 @@ if (productos == null) {
 //recupero el boton cargar producto
 const boton = document.querySelector('#btn-carga');
 
+//traigo por dom todos los textbox y select
+let tipoProducto = document.querySelector('#inTipo');
+let tipoTamPeso = document.querySelector('#selTamPeso');
+let precio = document.querySelector('#inPrecio');
+let stock = document.querySelector('#inStock');
+
+//traigo los textos de los select
+const selTipoTamPeso = tipoTamPeso.options[tipoTamPeso.selectedIndex].text;
+
 
 //evento de boton
-boton.addEventListener('click', () => {
-  debugger
-
-  //traigo por dom todos los textbox y select
-  const tipoProducto = document.querySelector('#inTipo').value;
-  const tipoTamPeso = document.querySelector('#selTamPeso');
-  const precio = Number(document.querySelector('#inPrecio').value);
-  const stock = Number(document.querySelector('#inStock').value);
-
-  //traigo los textos de los select
-  const selTipoTamPeso = tipoTamPeso.options[tipoTamPeso.selectedIndex].text;
+boton.addEventListener('click', () => { 
 
   //Verifico si el array esta vacio, se llena
   if (productos == "") {
@@ -109,8 +109,7 @@ boton.addEventListener('click', () => {
     return 
   }
   
-  //verifico que no cargue 2 veces el mismo producto, sino lo cargo
-  
+  //verifico que no cargue 2 veces el mismo producto, sino lo cargo  
   for (const key in productos) {
     if (productos[key].tipo == tipoProducto && productos[key].tamanio == selTipoTamPeso) {
       mensajeCarga('El Producto que desea cargar ya se encuentra en la lista!', 'danger')
@@ -129,14 +128,16 @@ boton.addEventListener('click', () => {
 
 
 const nuevoProducto = (tipoProducto,selTipoTamPeso,precio,stock) => {
+  debugger
   //contador de ID
   contador++
   //creo y apencheo el producto al array
-  const nuevoProducto = new Producto(contador,tipoProducto,selTipoTamPeso,precio,stock)
+  const nuevoProducto = new Producto(contador,tipoProducto.value,selTipoTamPeso.value,precio.value,stock.value)
   productos.push(nuevoProducto);  
 
   //Cargo el nuevo array al local junto con el contador
   localStorage.setItem('productos',JSON.stringify(productos));
+  localStorage.setItem('contador',contador);
 
   //reseteo el formulario
   form.reset()

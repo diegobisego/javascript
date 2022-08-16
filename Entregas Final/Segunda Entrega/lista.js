@@ -14,6 +14,21 @@ productos.forEach((elem) => {
     prodClone.children[2].innerText = elem.tamanio
     prodClone.children[3].innerText = '$ ' + elem.precio
     prodClone.children[4].innerText = elem.stock
+    prodClone.children[5].innerHTML = `<button class="btn btn-danger">Eliminar</button>`   
+    
+    let btn = prodClone.querySelector("button");    
+
+    //evento para eliminar el producto
+    btn.addEventListener('click', () => {
+
+        const index = productos.findIndex(item => item.id == elem.id);
+        const parent = btn.parentNode.parentNode
+        
+        productos.splice(index,1)
+        parent.parentNode.removeChild(parent)
+
+        localStorage.setItem('productos',JSON.stringify(productos))
+    })
 
     divLista.appendChild(prodClone)
 })
@@ -21,24 +36,17 @@ productos.forEach((elem) => {
 
 //remover fila
 
-const btnRemover = document.querySelector('#btnRemover');
+// btnRemover.addEventListener('click', () => {
+      
+//     const parent = btnRemover.parentNode.parentNode
+//     // indice = Number(parent.children[0].innerText)
 
-btnRemover.addEventListener('click', () => {  
-    debugger
-    const row = btn.parentNode.parentNode;
-    let tipo = row.children[0].innerText
-    let tamanio = row.children[1].innerText
-    row.parentNode.removeChild(row);
+//     for (const key in productos) {
+//         if (key == parent.rowIndex-1) {
+//             productos.splice(key,1)
+//             parent.parentNode.removeChild(parent)           
+//         }
+//     }
 
-    //busca por nombre de producto dentro del array y lo elimina
-    for (const key in productos) {
-        if (productos[key].tipo == tipo && productos[key].tamanio == tamanio) {
-            productos.splice(key,1)            
-        }
-    }
-
-    //lo vuelve a subir al storage
-    localStorage.setItem('productos',JSON.stringify(productos));
-  }
-
-)
+//     localStorage.setItem('productos',JSON.stringify(productos));
+// })
