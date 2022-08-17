@@ -61,7 +61,7 @@ input::-webkit-inner-spin-button {
 
 #div-product > div > button {
     width: 20px;
-    border-radius: 2px;
+    border-radius: 5px;
     background-color: rgb(148, 176, 205);
 }
 
@@ -84,3 +84,16 @@ input::-webkit-inner-spin-button {
     background: none;
     color: #fff;
 }
+
+#div-btn-comprar {
+    margin-top: 20px;
+}
+
+#imputProduct{
+    text-align: center;
+}
+
+.not-active { 
+    pointer-events: none; 
+    cursor: default; 
+} 

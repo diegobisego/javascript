@@ -2,12 +2,14 @@
 //recupero el array desde el storage
 let productos = JSON.parse(localStorage.getItem('productos'));
 
+
 //realizo el creado del template
 const divLista = document.querySelector('#lista')
 const temp = document.querySelector('#temp-productos')
 const lsProduct = temp.content.querySelector('#tr-list')
 
 productos.forEach((elem) => {
+    
     let prodClone = lsProduct.cloneNode(lsProduct,true);
     prodClone.children[0].innerText = elem.id
     prodClone.children[1].innerText = elem.tipo
@@ -31,22 +33,4 @@ productos.forEach((elem) => {
     })
 
     divLista.appendChild(prodClone)
-})
-
-
-//remover fila
-
-// btnRemover.addEventListener('click', () => {
-      
-//     const parent = btnRemover.parentNode.parentNode
-//     // indice = Number(parent.children[0].innerText)
-
-//     for (const key in productos) {
-//         if (key == parent.rowIndex-1) {
-//             productos.splice(key,1)
-//             parent.parentNode.removeChild(parent)           
-//         }
-//     }
-
-//     localStorage.setItem('productos',JSON.stringify(productos));
-// })
+});

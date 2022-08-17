@@ -73,16 +73,18 @@ for (const i of tamTipo) {
   /************************** ARRAYS DESDE STORAGE ***************************** */
 
 //recupero del local por el cambio de pagina a lista de precios
-let productos = JSON.parse(localStorage.getItem('productos'));
-let contador = JSON.parse(localStorage.getItem('contador'));
+let productos = JSON.parse(localStorage.getItem('productos')) || [];
+let contador = JSON.parse(localStorage.getItem('contador')) || 0;
 
 
-//veridfico si existe contador y array, sino los cargo desde el local
-if (productos == null || productos == "") {  
-  productos = [];
-  contador = 0
+
+//deshabilita productos si el array esta vacio
+const liProductos = document.querySelector('#liProductos');
+if (productos == "") {
+  liProductos.classList.toggle('not-active')
+  liListaProductos.classList.toggle('not-active') 
 }
- 
+
 
 
   /************************** DOM ***************************** */
@@ -96,16 +98,19 @@ let tipoTamPeso = document.querySelector('#selTamPeso');
 let precio = document.querySelector('#inPrecio');
 let stock = document.querySelector('#inStock');
 
-//traigo los textos de los select
-const selTipoTamPeso = tipoTamPeso.options[tipoTamPeso.selectedIndex].text;
+
 
 
 //evento de boton
 boton.addEventListener('click', () => { 
 
+  //traigo los textos de los select
+  const selTipoTamPeso = tipoTamPeso.options[tipoTamPeso.selectedIndex].text;
   //Verifico si el array esta vacio, se llena
   if (productos == "") {
     nuevoProducto(tipoProducto,selTipoTamPeso,precio,stock)
+    liProductos.classList.toggle('not-active')
+    liListaProductos.classList.toggle('not-active') 
     return 
   }
   
@@ -128,11 +133,11 @@ boton.addEventListener('click', () => {
 
 
 const nuevoProducto = (tipoProducto,selTipoTamPeso,precio,stock) => {
-  debugger
+      
   //contador de ID
   contador++
   //creo y apencheo el producto al array
-  const nuevoProducto = new Producto(contador,tipoProducto.value,selTipoTamPeso.value,precio.value,stock.value)
+  const nuevoProducto = new Producto(contador,tipoProducto.value,selTipoTamPeso,precio.value,stock.value)
   productos.push(nuevoProducto);  
 
   //Cargo el nuevo array al local junto con el contador
