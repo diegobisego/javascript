@@ -8,40 +8,7 @@ class Producto {
         (this.precio = Number(precio)),
         (this.stock = Number(stock));
     }
-    
-    // getters y setters
 
-    // getTipo= () => {
-    //   return this.tipo
-    // }
-
-    // setTipo = (t) => {
-    //   this.tipo = t;
-    // }
-
-    // getTamanio = () => {
-    //   return this.tamanio
-    // }
-
-    // setTamanio = (t) => {
-    //   this.tamanio = t;
-    // }
-
-    // getPrecio= () => {
-    //   return this.precio
-    // }
-
-    // setPrecio = (p) => {
-    //   this.precio = n;
-    // }
-
-    // getStock = () => {
-    //   return this.stock
-    // }
-
-    // setStock = (s) => {
-    //   this.stock = s;
-    // }
 
  
   }
