@@ -4,9 +4,10 @@ const btnCambiodark = document.querySelector('#cambio-dark');
 const nav = document.querySelector('nav')
 const main = document.querySelector('main')
 const productsList = document.querySelector('#div-product')
-const btnComprar = document.querySelector('#comprar')
+const btnComprar = document.querySelectorAll('#ftListEcco>div>button')
+const divDark = document.querySelectorAll('#ftListEcco')
 
-// shadow-lg p-3 mb-5 mt-5 bg-body rounded border border-2
+console.log(btnComprar)
 
 btnCambiodark.addEventListener('click', () => {
   
@@ -15,11 +16,14 @@ btnCambiodark.addEventListener('click', () => {
   nav.classList.toggle('navbar-dark')
   nav.classList.toggle('bg-dark')
   main.classList.toggle('navbar-dark')
-  main.classList.toggle('bg-dark')  
-  btnComprar.classList.toggle('btn-outline-light')
-  btnComprar.classList.toggle('btn-outline-dark')
+  main.classList.toggle('bg-dark')
 
-  
+  btnComprar.forEach((elem) => {
+    elem.classList.toggle('btn-outline-light')
+    elem.classList.toggle('btn-outline-dark')
+  })
+
+
   document.body.classList.contains('bg-dark') ? localStorage.setItem('dark-mode','true') : localStorage.setItem('dark-mode','false')
 
 })
@@ -28,12 +32,17 @@ if (localStorage.getItem('dark-mode') == 'true') {
   
   document.body.classList.add('bg-dark');
   btnCambiodark.classList.add('active');
-  nav.classList.toggle('navbar-dark')
-  nav.classList.toggle('bg-dark')
-  main.classList.toggle('navbar-dark')
-  main.classList.toggle('bg-dark')
-  btnComprar.classList.toggle('btn-outline-light')
-  btnComprar.classList.toggle('btn-outline-dark')
+  nav.classList.toggle('navbar-dark');
+  nav.classList.toggle('bg-dark');
+  main.classList.toggle('navbar-dark');
+  main.classList.toggle('bg-dark');
+
+  btnComprar.forEach((elem) => {
+    elem.classList.toggle('btn-outline-light')
+    elem.classList.toggle('btn-outline-dark')
+  })
+  
+
 } else {
   document.body.classList.remove('bg-dark');
   btnCambiodark.classList.remove('active');
