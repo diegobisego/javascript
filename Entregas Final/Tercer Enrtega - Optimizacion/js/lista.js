@@ -22,15 +22,74 @@ productos.forEach((elem) => {
 
     //evento para eliminar el producto
     btn.addEventListener('click', () => {
+        //sweetAlert
+        Swal.fire({
+            title: '¿Desea eliminar el producto?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Eliminar',
+            denyButtonText: `Volver`,
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              const index = productos.findIndex(item => item.id == elem.id);
+              const parent = btn.parentNode.parentNode
+            
+              productos.splice(index,1)
+              parent.parentNode.removeChild(parent)
+              localStorage.setItem('productos',JSON.stringify(productos))
 
-        const index = productos.findIndex(item => item.id == elem.id);
-        const parent = btn.parentNode.parentNode
-        
-        productos.splice(index,1)
-        parent.parentNode.removeChild(parent)
+              Swal.fire('¡Producto Eliminado!', '', 'success')
 
-        localStorage.setItem('productos',JSON.stringify(productos))
+            } else if (result.isDenied) {
+              Swal.fire('No se elimino el producto', '', 'info')
+            }
+          })
     })
 
     divLista.appendChild(prodClone)
 });
+
+
+
+
+
+const eliminarDelCarrito = (idProducto) => {
+	const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+		  confirmButton: 'btn btn-success',
+		  cancelButton: 'btn btn-danger'
+		},
+		buttonsStyling: false
+	  })
+	  
+	  swalWithBootstrapButtons.fire({
+		title: 'Estas seguro que deseas eliminar este producto?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'si,eliminar!',
+		cancelButtonText: 'No, cancelar!',
+		reverseButtons: true
+	  }).then((result) => {
+		if (result.isConfirmed) {
+		  swalWithBootstrapButtons.fire(
+			'El producto ha sido eliminado.',
+			'success'
+		  )
+		} else if (
+		  /* Read more about handling dismissals below */
+		  result.dismiss === Swal.DismissReason.cancel
+		) {
+		  swalWithBootstrapButtons.fire(
+			'Cancelled',
+			'Your imaginary file is safe :)',
+			'error'
+		  )
+		}
+	  })
+	const item = carrito.find((producto) => producto.id === idProducto);
+	const indice = carrito.indexOf(item); //Busca el elemento q yo le pase y nos devuelve su indice.
+	carrito.splice(indice, 1); //Le pasamos el indice de mi elemento ITEM y borramos
+	actualizarCarrito(); //Llamamos a la funcion de actualizar cada vez que se modifica el carrito
+   
+};

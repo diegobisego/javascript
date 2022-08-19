@@ -1,17 +1,3 @@
-/************************** CLASE ***************************** */
-//clase
-class Producto {
-    constructor(id, tipo, tamanio, precio,stock) {
-        (this.id = Number(id)),
-        (this.tipo = tipo),
-        (this.tamanio = tamanio),
-        (this.precio = Number(precio)),
-        (this.stock = Number(stock));
-    }
-
-
- 
-  }
 
 //evito el reinicio de la pagina
 const form = document.querySelector('#form');
@@ -71,6 +57,8 @@ let stock = document.querySelector('#inStock');
 //evento de boton
 boton.addEventListener('click', () => { 
 
+  
+
   //traigo los textos de los select
   const selTipoTamPeso = tipoTamPeso.options[tipoTamPeso.selectedIndex].text;
   //Verifico si el array esta vacio, se llena
@@ -115,18 +103,28 @@ const nuevoProducto = (tipoProducto,selTipoTamPeso,precio,stock) => {
   form.reset()
 
   //muestro mensaje de exito de carga que se cierra en 2 segundos
-  mensajeCarga('Producto cargado con exito!', 'success')
-  setTimeout(() => div.parentNode.removeChild(div),2000) 
+  // mensajeCarga('Producto cargado con exito!', 'success')
+  setTimeout(() => div.parentNode.removeChild(div),2000)
+  
+  //sweet 
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Producto cargado con Exito',
+    showConfirmButton: false,
+    timer: 3000
+  })
   return
 }
 
-//creacion y declaracion de funcion para mensaje de exito
-const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-const div = document.createElement('div')
+// //creacion y declaracion de funcion para mensaje de exito
+// const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+// const div = document.createElement('div')
 
-const mensajeCarga = (mensaje, tipo) => {  
-  div.innerHTML = '<div class="alert alert-' + tipo + ' alert-dismissible" role="alert">' + mensaje + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
-  alertPlaceholder.append(div)
-}
+// const mensajeCarga = (mensaje, tipo) => {  
+//   div.innerHTML = '<div class="alert alert-' + tipo + ' alert-dismissible" role="alert">' + mensaje + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+//   alertPlaceholder.append(div)
+// }
+
 
 

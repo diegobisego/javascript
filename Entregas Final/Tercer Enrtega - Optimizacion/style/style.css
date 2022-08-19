@@ -20,6 +20,8 @@ input::-webkit-inner-spin-button {
     outline: none;
     align-items: center;
     height: min-content;
+    margin-right: 50px;
+    transition: .9s;
 }
 
 .row-fluid.navbar-dark.bg-dark {
@@ -70,11 +72,11 @@ input::-webkit-inner-spin-button {
     width: 30px;
 }
 
-#div-product > div {
-    margin: 20px 0;
-    border: 1px solid white;
-    padding: 20px 0;
-}
+    #div-product > div {
+        margin: 20px 0;
+        border: 1px solid white;
+        padding: 20px 0;
+    }
 
 .cambio-dark > span {
     width: 30px;
@@ -98,3 +100,24 @@ input::-webkit-inner-spin-button {
     cursor: default; 
 } 
 
+#btnCarrito {
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: rgb(194, 220, 108);
+    border-radius: 5px;
+}
+
+#btnCarrito:hover{
+    background-color: aquamarine;
+    transition: .5s;
+}
+
+
+/* modal */
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+}

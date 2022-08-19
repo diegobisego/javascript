@@ -7,8 +7,6 @@ const productsList = document.querySelector('#div-product')
 const btnComprar = document.querySelectorAll('#ftListEcco>div>button')
 const divDark = document.querySelectorAll('#ftListEcco')
 
-console.log(btnComprar)
-
 btnCambiodark.addEventListener('click', () => {
   
   document.body.classList.toggle('bg-dark');
@@ -41,7 +39,6 @@ if (localStorage.getItem('dark-mode') == 'true') {
     elem.classList.toggle('btn-outline-light')
     elem.classList.toggle('btn-outline-dark')
   })
-  
 
 } else {
   document.body.classList.remove('bg-dark');
