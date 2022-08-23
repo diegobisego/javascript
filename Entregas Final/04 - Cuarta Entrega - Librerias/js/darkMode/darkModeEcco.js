@@ -11,9 +11,9 @@ btnCambiodark.addEventListener('click', () => {
   
   document.body.classList.toggle('bg-dark');
   btnCambiodark.classList.toggle('active');
-  nav.classList.toggle('navbar-dark')
+  nav.classList.toggle('mode-dark-nav-bg')
   nav.classList.toggle('bg-dark')
-  main.classList.toggle('navbar-dark')
+  main.classList.toggle('mode-dark-nav-bg')
   main.classList.toggle('bg-dark')
 
   btnComprar.forEach((elem) => {
@@ -30,9 +30,9 @@ if (localStorage.getItem('dark-mode') == 'true') {
   
   document.body.classList.add('bg-dark');
   btnCambiodark.classList.add('active');
-  nav.classList.toggle('navbar-dark');
+  nav.classList.toggle('mode-dark-nav-bg');
   nav.classList.toggle('bg-dark');
-  main.classList.toggle('navbar-dark');
+  main.classList.toggle('mode-dark-nav-bg');
   main.classList.toggle('bg-dark');
 
   btnComprar.forEach((elem) => {

@@ -10,25 +10,53 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+/******** BOTONES NAV **********/
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.botones-fondo {
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+}
+
+#btn-user {
+    border-radius: 100px;
+    width: 50px;
+}
+
+
+/***** DARK MODE *****/
+
 .cambio-dark {
     background: #343d5b;
     border-radius: 100px;
     border: none;
-    position: absolute;
-    top: 10;
-    right: 0;
+    position: relative;
     cursor: pointer;
     display: flex;
     outline: none;
     align-items: center;
     height: min-content;
     margin-right: 50px;
-    transition: .9s;
 }
 
 .row-fluid.navbar-dark.bg-dark {
     color: white;
 }
+
+.mode-dark-bg {
+    background: linear-gradient(to top, #444444 0%, #CCCCCC 100%);
+    transition: 0 0 0 .3;
+}
+
+.mode-dark-nav-bg {
+    background: linear-gradient(to bottom, #444444 0%, #CCCCCC 100%);
+}
+
 
 
 .cambio-dark::after{
@@ -49,6 +77,7 @@ input::-webkit-inner-spin-button {
 .cambio-dark.active {
     background: orange;
     color: black;
+    position: relative;
 }
 
 .cambio-dark.active::after {
@@ -74,11 +103,11 @@ input::-webkit-inner-spin-button {
     width: 30px;
 }
 
-    #div-product > div {
-        margin: 20px 0;
-        border: 1px solid white;
-        padding: 20px 0;
-    }
+#div-product > div {
+    margin: 20px 0;
+    border: 1px solid white;
+    padding: 20px 0;
+}
 
 .cambio-dark > span {
     width: 30px;
@@ -123,5 +152,25 @@ input::-webkit-inner-spin-button {
 .nav-item {
     margin-left: 20px;
 }
+/***************  INPUT ******************/
+#inCantidad {
+    width: 130px;
+}
 
+#idUM {
+    width: 80px;
+}
 
+/***************  FORM ******************/
+
+#from {
+    display: flex;
+    justify-content: center;
+}
+
+#form-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

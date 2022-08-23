@@ -9,14 +9,13 @@ form.addEventListener('submit', (e) =>{
   /************************** ARRAYS ADICIONALES ***************************** */
 
 //Carga el select tamaño/peso de productos desd el array
-let tamTipo = ['800 Gms.','1 Kg.','2 Kgs.','5 kgs.','1 Lt.','2 Lts.','5 Lts.','10 Lts.','20 Lts.',
-              'Medianos','Grandes Color','Grandes Blancos'];
-const selTamPeso = document.querySelector('#selTamPeso')
+let tamTipo = ['G','Kg','L','Medianos','Grandes Color','Grandes Blancos'];
+const idUM = document.querySelector('#idUM')
 
 
 for (const i of tamTipo) {
   const option = document.createElement('option');
-  selTamPeso.appendChild(option)
+  idUM.appendChild(option)
   option.innerHTML = i
   option.setAttribute('value',tamTipo[i])
 }
@@ -38,7 +37,7 @@ const boton = document.querySelector('#btn-carga');
 
 //traigo por dom todos los textbox y select
 let tipoProducto = document.querySelector('#inTipo');
-let tipoTamPeso = document.querySelector('#selTamPeso');
+let tipoTamPeso = document.querySelector('#idUM');
 let precio = document.querySelector('#inPrecio');
 let stock = document.querySelector('#inStock');
 
