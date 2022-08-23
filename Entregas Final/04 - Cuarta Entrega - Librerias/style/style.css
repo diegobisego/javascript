@@ -10,6 +10,7 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+
 /******** BOTONES NAV **********/
 
 #navbar {
@@ -42,21 +43,18 @@ input::-webkit-inner-spin-button {
     align-items: center;
     height: min-content;
     margin-right: 50px;
+    transition: 1s;
 }
 
 .row-fluid.navbar-dark.bg-dark {
     color: white;
+    transition: 2s;
 }
 
 .mode-dark-bg {
     background: linear-gradient(to top, #444444 0%, #CCCCCC 100%);
-    transition: 0 0 0 .3;
-}
 
-.mode-dark-nav-bg {
-    background: linear-gradient(to bottom, #444444 0%, #CCCCCC 100%);
 }
-
 
 
 .cambio-dark::after{
@@ -72,20 +70,34 @@ input::-webkit-inner-spin-button {
      border-radius: 100px;
      transition: .3s ease all;
      box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .2);
+
 }
 
 .cambio-dark.active {
     background: orange;
     color: black;
     position: relative;
+    
 }
 
 .cambio-dark.active::after {
     right: 0;
     left: unset;
+
+    
 }
 
-/* modificadores de los div de productos */
+.cambio-dark > span {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    background: none;
+    color: #fff;
+
+}
+
+/***************  MODIFICADORES DE LOS DIV DE PRODUCTOS ******************/
 
 #iconProduct {
     width: 10px;
@@ -109,14 +121,7 @@ input::-webkit-inner-spin-button {
     padding: 20px 0;
 }
 
-.cambio-dark > span {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    display: block;
-    background: none;
-    color: #fff;
-}
+
 
 #div-btn-comprar {
     margin-top: 20px;
@@ -143,7 +148,7 @@ input::-webkit-inner-spin-button {
     transition: .5s;
 }
 
-/* botones main */
+/***************  BOTONES MAIN ******************/
 
 .bttn-unite.bttn-lg.bttn-primary {
     margin-top: 20px;
@@ -173,4 +178,21 @@ input::-webkit-inner-spin-button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+ 
+/*************** FORM VENTAS ******************/
+
+
+#form-ventas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#form-ventas input, #form-ventas select {
+    justify-content: center;
+    align-items: center;
+    width: 200px;
 }
