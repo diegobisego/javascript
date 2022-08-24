@@ -196,3 +196,27 @@ input::-webkit-inner-spin-button {
     align-items: center;
     width: 200px;
 }
+
+
+#portalVentas {
+    justify-content: space-between;
+    
+}
+
+
+#opCliente {
+    margin-top: 7px;
+}
+
+#idTotalVenta {
+    font-weight: bold;
+}
+
+
+#btnFinalizarVenta {
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

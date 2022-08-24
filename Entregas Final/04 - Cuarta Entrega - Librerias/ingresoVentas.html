@@ -42,34 +42,89 @@
         </div>
       </nav>  
     </header>
-    <main class="container text-center">
+      <main class="container text-center">
         <div id="liveAlertPlaceholder"></div>
-        <div class="row justify-content-center">
+          <div class="row" id="portalVentas">
+            <div>
+              <label for="exampleInputEmail1" class="form-label mt-3">Fecha
+                <input type="date" class="form-control mt-2 text-center" id="inDate" aria-describedby="fecha">
+              </label>
+              <label for="exampleInputEmail1" class="form-label mt-3">Nro Factura
+                <input type="number" class="form-control mt-2 text-center" id="inCantidad" aria-describedby="tipo">
+              </label>
+              <label for="exampleInputEmail1" class="form-label mt-3">Cliente
+                <select class="form-select" aria-label="Default select example" id="opCliente">
+                  <option selected>Seleccione un cliente</option>
+                  <!-- se ingresa por dom la lista de clientes -->
+                </select>
+              </label>
+              <label for="exampleInputEmail1" class="form-label mt-3">Tipo de Pago
+                <select class="form-select" aria-label="Default select example" id="opCliente">
+                  <option selected>Seleccione un tipo</option>
+                  <!-- se ingresa por dom la lista de tipo -->
+                </select>
+              </label>
+              <hr>
+            </div>
             <div class="d-grid gap-3 col-sm-4 bg-light shadow-lg p-3 mb-5 mt-5 bg-body rounded border border-2">
                 <h1 class="fs-4 fw-light">INGRESO DE VENTA</h1>
                 <form action="" id="form">
                     <div class="mb-3" id="form-ventas">
-                        <label for="exampleInputEmail1" class="form-label mt-3">Fecha
-                          <input type="date" class="form-control mt-2 text-center" id="inDate" aria-describedby="fecha">
-                        </label>
-                        <label for="exampleInputEmail1" class="form-label mt-3">Nro Factura
-                          <input type="number" class="form-control mt-2 text-center" id="inCantidad" aria-describedby="tipo">
-                        </label>
-                        <label for="exampleInputEmail1" class="form-label mt-3 ">Producto
-                          <!-- aca va por dom elegir el producto a vender-->
+                        <label for="exampleInputEmail1" class="form-label mt-3 ">Producto                          
                           <select class="form-select text-center mt-2" aria-label="Default select example" id="idVtaProd">
-                              
+                            <option value="">Seleccione un producto</option>
+                              <!-- aca va por dom elegir el producto a vender-->
                           </select>
                         </label>
-                        <label for="exampleInputEmail1" class="form-label mt-3">Stock
-                            <input type="number" class="form-control mt-2 text-center" id="inStock" aria-describedby="stock">
+                        <label for="exampleInputEmail1" class="form-label mt-3">Cantidad
+                          <input type="number" class="form-control mt-2 text-center" id="inCantidadVenta" aria-describedby="stock">
                         </label>
-                        <button type="submit" class="btn btn-dark mt-5" id="btn-carga">Ingresar Venta</button>
-                      </div>
-                </form>
-            </div>
-        </div>            
-    </main>
+                        <label for="exampleInputEmail1" class="form-label mt-3">Precio por Unidad
+                          <input type="number" class="form-control mt-2 text-center" id="inPrecUni" aria-describedby="stock">
+                        </label>
+                        <button type="submit" class="btn btn-dark mt-5" id="btnAgregarVenta">Agregar</button>
+                        </div>
+                  </form>
+              </div>
+              <div class="d-grid gap-3 col-sm-6 bg-light shadow-lg p-3 mb-5 mt-5 bg-body rounded border border-2">
+                <h1 class="fs-4 fw-light">RESUMEN DE VENTA</h1>
+                <form action="" id="form">
+                  <!-- aca van los li por dom de las ventas -->
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template class="tempDetalleVenta">
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>Aceite</td>
+                          <td>20<span id="umProducto"></span></td>
+                          <td><span>$ </span>1200</td>
+                        </tr>
+                      |</template>
+                    </tbody>
+                    <tr>
+                      <th></th>
+                      <td></td>
+                      <td style="font-weight: bold;">TOTAL</td>
+                      <td id="idTotalVenta"></td>
+                    </tr>
+                    <tfoot>
+                      <hr>
+                    </tfoot>
+                    </table>     
+                    <button class="btn btn-dark mt-5" id="btnFinalizarVenta">Finalizar Venta</button>             
+                  </form>
+              </div>
+          </div>
+                      
+      </main>
    
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

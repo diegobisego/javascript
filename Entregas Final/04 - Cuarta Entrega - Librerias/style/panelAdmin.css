@@ -25,3 +25,9 @@ body {
     font-family: 'Aboreto', cursive;
     color: white;
 }
+
+div a button {
+    width: 300px;
+}
+
+

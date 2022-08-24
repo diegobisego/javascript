@@ -14,3 +14,21 @@ for (const i of productos) {
 
 /************* PRECIO DEL PRODUCTO SEGUN LA SELECCION ******************/ 
 
+const precioUnitario = () => {
+
+  const seleccion = idVtaProd.options[idVtaProd.selectedIndex].text;
+  const precioUnitario = document.querySelector('#inPrecUni')
+  
+  productos.find(element => {
+      element.tipo == seleccion ? precioUnitario.value = element.precio : null
+  });
+
+}
+
+// const btnAgregarVenta = document.querySelector('btnAgregarVenta');
+
+idVtaProd.addEventListener('change', () => {
+  precioUnitario();
+
+})
+
