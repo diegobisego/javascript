@@ -82,13 +82,13 @@
                         <label for="exampleInputEmail1" class="form-label mt-3">Precio por Unidad
                           <input type="number" class="form-control mt-2 text-center" id="inPrecUni" aria-describedby="stock">
                         </label>
-                        <button type="submit" class="btn btn-dark mt-5" id="btnAgregarVenta">Agregar</button>
+                        <button type="submit" class="btn btn-dark mt-5" id="btnagregarListaVenta">Agregar</button>
                         </div>
                   </form>
               </div>
               <div class="d-grid gap-3 col-sm-6 bg-light shadow-lg p-3 mb-5 mt-5 bg-body rounded border border-2">
                 <h1 class="fs-4 fw-light">RESUMEN DE VENTA</h1>
-                <form action="" id="form">
+                <form action="" id="formVentas">
                   <!-- aca van los li por dom de las ventas -->
                   <table class="table">
                     <thead>
@@ -99,14 +99,15 @@
                         <th scope="col">Precio</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <template class="tempDetalleVenta">
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Aceite</td>
-                          <td>20<span id="umProducto"></span></td>
-                          <td><span>$ </span>1200</td>
-                        </tr>
+                    <tbody id="tVentas">
+                      <template id="tempDetalleVenta">
+                          <tr id="trTemp">
+                            <th scope="row"></th>
+                            <td></td>
+                            <td><span id="umProducto"></span></td>
+                            <td><span>$ </span></td>
+                            <td><td><button class="btn btn-danger" id="btnEliminar">Elimiar</button></td></td>
+                          </tr>
                       |</template>
                     </tbody>
                     <tr>
@@ -133,6 +134,7 @@
     <script src="./js/ingresoVentas.js"></script>
     <script src="./js/Clases/producto.js"></script>
     <script src="./js/darkMode/darkMode.js"></script>
+    <script src="./js/Clases/ProductoVenta.js"></script>
 </body>
 </html>
 

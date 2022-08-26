@@ -220,3 +220,23 @@ input::-webkit-inner-spin-button {
     justify-content: center;
     align-items: center;
 }
+
+
+/*************** FORM CLIENTES ******************/
+
+#inNombreCliente,#inTelefonoCliente, #inDniCuitCliente, #inDomicilioCliente, #inEmailCliente,#idCiudadCliente {
+    width: 250px;
+}
+
+
+#divTipoPago {
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 5px;
+}
+
+#divTipoPago label {
+    margin-left: 8px;
+}
