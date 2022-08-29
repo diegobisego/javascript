@@ -1,37 +1,29 @@
 {
-    "productos": [
-        {
-            "id": 1,
-            "tipo": "Aceite Comestible",
-            "tamanio": 5,
-            "precio": 2500,
-            "stock": 3455
-        },
-        {
-            "id": 2,
-            "tipo": "Aceitunas",
-            "tamanio": 2,
-            "precio": 900,
-            "stock": 456
-        }
-    ],
-    "clientes": [
-        {
-            "nombre": "Diego Bisego",
-            "dniCuit": "32934045",
-            "telefono": "3534774748",
-            "domicilio": "Carlos Pellegrini 927",
-            "Ciudad": "Villa Maria",
-            "email": "diegobisego@gmail.com",
-            "tipoPago": "Contado Efectivo"
-        }
-    ],
-    "usuarios": [
-        {
-            "nombreUsuario": "Grunklen",
-            "password": "123456",
-            "email": "diegobisego@gmail.com"
-        }
-    ]
-
+  "productos": [
+    {
+      "tipo": "Aceite Comestible",
+      "tamanio": 5,
+      "precio": 2500,
+      "stock": 3455,
+      "id": 1
+    }
+  ],
+  "clientes": [
+    {
+      "nombre": "Diego Bisego",
+      "dniCuit": "32934045",
+      "telefono": "3534774748",
+      "domicilio": "Carlos Pellegrini 927",
+      "Ciudad": "Villa Maria",
+      "email": "diegobisego@gmail.com",
+      "tipoPago": "Contado Efectivo"
+    }
+  ],
+  "usuarios": [
+    {
+      "nombreUsuario": "Grunklen",
+      "password": "123456",
+      "email": "diegobisego@gmail.com"
+    }
+  ]
 }

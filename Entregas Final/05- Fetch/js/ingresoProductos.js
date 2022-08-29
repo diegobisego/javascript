@@ -22,15 +22,20 @@ for (const i of tamTipo) {
 
 
 
-  /************************** ARRAYS DESDE STORAGE ***************************** */
-
-//recupero del local por el cambio de pagina a lista de precios
-let productos = JSON.parse(localStorage.getItem('productos')) || [];
-let contador = JSON.parse(localStorage.getItem('contador')) || 0;
+  /************************** FETCH GET ***************************** */
 
 
+let productos = [];
 
-  /************************** DOM ***************************** */
+//Metodo GET para FETCH de productos, para luego comparar contenido
+fetch('http://localhost:5000/Productos')
+  .then((res) => res.json())
+  .then((data) => {
+    productos.push(...data); 
+});
+
+
+  /************************** DOM Y EVENTO AGREGAR ***************************** */
  
 //recupero el boton cargar producto
 const boton = document.querySelector('#btn-carga');
@@ -41,67 +46,73 @@ let tipoTamPeso = document.querySelector('#idUM');
 let precio = document.querySelector('#inPrecio');
 let stock = document.querySelector('#inStock');
 
-
-
-
 //evento de boton
 boton.addEventListener('click', () => { 
+  debugger
   
   //traigo los textos de los select
   const selTipoTamPeso = tipoTamPeso.options[tipoTamPeso.selectedIndex].text;
 
   //Verifico si el array esta vacio, se llena
   if (productos == "") {
-    nuevoProducto(tipoProducto,selTipoTamPeso,precio,stock)
-    liProductos.classList.toggle('not-active')
-    liListaProductos.classList.toggle('not-active') 
+    PostProducto(tipoProducto,selTipoTamPeso,precio,stock)
     return 
   }
   
-  //verifico que no cargue 2 veces el mismo producto, sino lo cargo  
+  //verifico que no cargue 2 veces el mismo producto  
   for (const key in productos) {
-    if (productos[key].tipo == tipoProducto && productos[key].tamanio == selTipoTamPeso) {
-      mensajeCarga('El Producto que desea cargar ya se encuentra en la lista!', 'danger')
-      setTimeout(() => div.parentNode.removeChild(div),2000)
-      form.reset()
-      return            
+    if (productos[key].tipo == tipoProducto.value && productos[key].tamanio == selTipoTamPeso) {
+      alertCarga(2)
+      return     
     }
   }
 
-  nuevoProducto(tipoProducto,selTipoTamPeso,precio,stock);
+  PostProducto(tipoProducto,selTipoTamPeso,precio,stock);  
 });
-
 
   /************************** FUNCIONES ADICIONALES ***************************** */
  
+  const alertCarga = (tipo) => {
+    debugger
+    if (tipo == 1) {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Producto cargado con Exito',
+        showConfirmButton: false,
+        timer: 2000
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Producto duplicado',
+        text: 'El producto ya se encuentra cargado!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
+    }
+  }
 
 
-const nuevoProducto = (tipoProducto,selTipoTamPeso,precio,stock) => {
-      
-  //contador de ID
-  contador++
-  //creo y apencheo el producto al array
-  const nuevoProducto = new Producto(contador,tipoProducto.value,selTipoTamPeso,precio.value,stock.value)
-  productos.push(nuevoProducto);  
+const PostProducto = (tipoProducto,selTipoTamPeso,precio,stock) => {
+  debugger
 
-  //Cargo el nuevo array al local junto con el contador
-  localStorage.setItem('productos',JSON.stringify(productos));
-  localStorage.setItem('contador',contador);
+  fetch('http://localhost:5000/Productos', {
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json; charset=UTF-8',
+  },
+  body: JSON.stringify({
+    tipo: tipoProducto.value,
+    tamanio: selTipoTamPeso,
+    precio: precio.value,
+    stock: stock.value
 
-  //reseteo el formulario
-  form.reset()
-
-  setTimeout(() => div.parentNode.removeChild(div),2000)
-  
-  //sweet carga de producto ok
-  Swal.fire({
-    position: 'center',
-    icon: 'success',
-    title: 'Producto cargado con Exito',
-    showConfirmButton: false,
-    timer: 2000
   })
-  return
+})
+  .then((resp) => resp.json())
+  .then((data) => {
+    alertCarga(1);
+    })
 }
 
 
