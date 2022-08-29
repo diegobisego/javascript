@@ -6,6 +6,69 @@
       "precio": 2500,
       "stock": 3455,
       "id": 1
+    },
+    {
+      "tipo": "Prueba 2",
+      "tamanio": "G",
+      "precio": "2",
+      "stock": "2",
+      "id": 2
+    },
+    {
+      "tipo": "Prueba",
+      "tamanio": "G",
+      "precio": "22",
+      "stock": "33",
+      "id": 3
+    },
+    {
+      "tipo": "",
+      "tamanio": "",
+      "precio": "",
+      "stock": "",
+      "id": 4
+    },
+    {
+      "tipo": "",
+      "tamanio": "",
+      "precio": "",
+      "stock": "",
+      "id": 5
+    },
+    {
+      "tipo": "",
+      "tamanio": "",
+      "precio": "",
+      "stock": "",
+      "id": 6
+    },
+    {
+      "tipo": "",
+      "tamanio": "",
+      "precio": "",
+      "stock": "",
+      "id": 7
+    },
+    {
+      "tipo": "",
+      "tamanio": "",
+      "precio": "",
+      "stock": "",
+      "id": 8
+    },
+    {
+      "tipo": "",
+      "tamanio": "",
+      "precio": "",
+      "stock": "",
+      "id": 9
+    },
+    {
+      "tipo": "",
+      "tamanio": "",
+      "precio": "",
+      "stock": "",
+      "id": 10
     }
   ],
   "clientes": [

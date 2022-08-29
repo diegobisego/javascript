@@ -42,32 +42,28 @@ const boton = document.querySelector('#btn-carga');
 
 //traigo por dom todos los textbox y select
 let tipoProducto = document.querySelector('#inTipo');
-let tipoTamPeso = document.querySelector('#idUM');
+let tipoTamPeso = document.querySelector('#inCantidad');
 let precio = document.querySelector('#inPrecio');
 let stock = document.querySelector('#inStock');
 
 //evento de boton
 boton.addEventListener('click', () => { 
-  debugger
   
-  //traigo los textos de los select
-  const selTipoTamPeso = tipoTamPeso.options[tipoTamPeso.selectedIndex].text;
-
   //Verifico si el array esta vacio, se llena
   if (productos == "") {
-    PostProducto(tipoProducto,selTipoTamPeso,precio,stock)
+    PostProducto(tipoProducto,tipoTamPeso,precio,stock)
     return 
   }
   
   //verifico que no cargue 2 veces el mismo producto  
   for (const key in productos) {
-    if (productos[key].tipo == tipoProducto.value && productos[key].tamanio == selTipoTamPeso) {
+    if (productos[key].tipo == tipoProducto.value && productos[key].tamanio == tipoTamPeso.value) {
       alertCarga(2)
       return     
     }
   }
 
-  PostProducto(tipoProducto,selTipoTamPeso,precio,stock);  
+  PostProducto(tipoProducto,tipoTamPeso,precio,stock);  
 });
 
   /************************** FUNCIONES ADICIONALES ***************************** */
@@ -84,17 +80,17 @@ boton.addEventListener('click', () => {
       })
     } else {
       Swal.fire({
+        position: 'center',
         icon: 'error',
-        title: 'Producto duplicado',
-        text: 'El producto ya se encuentra cargado!',
-        footer: '<a href="">Why do I have this issue?</a>'
+        title: 'El Producto ya se encuentra cargado',
+        showConfirmButton: false,
+        timer: 2000
       })
     }
   }
 
 
-const PostProducto = (tipoProducto,selTipoTamPeso,precio,stock) => {
-  debugger
+const PostProducto = (tipoProducto,tipoTamPeso,precio,stock) => {
 
   fetch('http://localhost:5000/Productos', {
   method: 'POST',
@@ -103,7 +99,7 @@ const PostProducto = (tipoProducto,selTipoTamPeso,precio,stock) => {
   },
   body: JSON.stringify({
     tipo: tipoProducto.value,
-    tamanio: selTipoTamPeso,
+    tamanio: tipoTamPeso.value,
     precio: precio.value,
     stock: stock.value
 
