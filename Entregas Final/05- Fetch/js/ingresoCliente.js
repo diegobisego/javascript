@@ -2,6 +2,7 @@ const form = document.querySelector('#form');
 form.addEventListener('submit', (e) =>{
   e.preventDefault()
 })  
+debugger
 
   /************************** ARRAYS CIUDADES ***************************** */
 
@@ -17,6 +18,17 @@ for (const i of ciudades) {
   option.setAttribute('value',ciudades[i])
 }
 
+  /************************** FETCH GET ***************************** */
+
+let clientes = [];
+let contadorId;
+
+//Metodo GET para FETCH de clientes, para luego comparar contenido
+fetch('http://localhost:5000/clientes')
+  .then((res) => res.json())
+  .then((data) => {
+    clientes.push(...data); 
+});
 
   /************************** ARRAYS FORMA DE PAGO ***************************** */
 
@@ -27,14 +39,17 @@ let tipoPagoArr = ['Contado Efectivo','Transferencia','Cheque'];
 const tipoPago = document.querySelector('#tipoPago')
 const tempTipoPAgo = document.querySelector('#tempTipoPAgo')
 const divTipoPago = tempTipoPAgo.content.querySelector('#divTipoPago')
-debugger
 
 tipoPagoArr.forEach((elem,index) => {
-    debugger
-    console.log(elem)
     let prodClone = divTipoPago.cloneNode(divTipoPago,true);
+    prodClone.children[0].setAttribute('for',index)
     prodClone.children[0].setAttribute('id',index)
+    prodClone.children[1].setAttribute('for',index)
+    prodClone.children[0].setAttribute('id',index)
+    prodClone.children[0].setAttribute('name','RadioTipoPago')
+    prodClone.children[1].setAttribute('name','labelTipoPago')
     prodClone.children[1].innerText = elem;
+    // prodClone.children[0].text = elem;
     if (index == 0) {
         prodClone.children[0].setAttribute('checked','true')
     }    
@@ -43,3 +58,74 @@ tipoPagoArr.forEach((elem,index) => {
     tipoPago.appendChild(prodClone)
 })
 
+
+  /************************** FETCH CLIENTES ***************************** */
+
+const inNombreCliente = document.querySelector('#inNombreCliente');
+const inDniCuitCliente = document.querySelector('#inDniCuitCliente');
+const inTelefonoCliente = document.querySelector('#inTelefonoCliente');
+const inDomicilioCliente = document.querySelector('#inDomicilioCliente');
+const idCiudadCliente = document.querySelector('#idCiudadCliente');
+const inEmailCliente = document.querySelector('#inEmailCliente');
+const btnCargaClientes = document.querySelector('#btnCargaClientes');
+const RadioTipoPago = document.getElementsByName('RadioTipoPago')
+const labelChecked = document.getElementsByName('labelTipoPago')
+
+
+
+
+btnCargaClientes.addEventListener('click', () => {
+  debugger
+  let selecTipoPago;
+
+  for (var i = 0; i <  RadioTipoPago.length; i++) {
+    if (RadioTipoPago[i].checked) {
+    selecTipoPago = labelChecked[i].innerHTML
+     break;
+    }
+  }
+
+  if (clientes == "") {
+    contadorId = 1;
+    postClientes(contadorId,inNombreCliente,inDniCuitCliente,inTelefonoCliente,inDomicilioCliente,idCiudadCliente,inEmailCliente,selecTipoPago)
+    return 
+  }
+
+    //verifico que no cargue 2 veces el mismo producto  
+  for (const key in clientes) {
+    if (clientes[key].dniCuit == inDniCuitCliente.value) {
+      alertCarga(2,'cliente')
+      return 
+      }           
+    }
+  
+  contadorId = clientes.id + 1
+  postClientes(contadorId,inNombreCliente,inDniCuitCliente,inTelefonoCliente,inDomicilioCliente,idCiudadCliente,inEmailCliente,selecTipoPago)
+  form.reset()
+})
+
+
+const postClientes = (contadorId,inNombreCliente,inDniCuitCliente,inTelefonoCliente,inDomicilioCliente,idCiudadCliente,inEmailCliente,selecTipoPago) => {
+  debugger
+  fetch('http://localhost:5000/clientes', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json; charset=UTF-8',
+    },
+    body: JSON.stringify({
+      id: contadorId,
+      nombre: inNombreCliente.value,
+      dniCuit: inDniCuitCliente.value,
+      telefono: inTelefonoCliente.value,
+      domicilio: inDomicilioCliente.value,
+      Ciudad: idCiudadCliente.value,
+      email: inEmailCliente.value,
+      tipoPago: selecTipoPago,
+  
+    })
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      alertCarga(1,"Cliente");
+      })
+}

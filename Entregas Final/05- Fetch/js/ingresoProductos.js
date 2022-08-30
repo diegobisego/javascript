@@ -26,14 +26,14 @@ for (const i of tamTipo) {
 
 
 let productos = [];
+let contadorId;
 
 //Metodo GET para FETCH de productos, para luego comparar contenido
-fetch('http://localhost:5000/Productos')
+fetch('http://localhost:5000/productos')
   .then((res) => res.json())
   .then((data) => {
     productos.push(...data); 
 });
-
 
   /************************** DOM Y EVENTO AGREGAR ***************************** */
  
@@ -51,46 +51,29 @@ boton.addEventListener('click', () => {
   
   //Verifico si el array esta vacio, se llena
   if (productos == "") {
-    PostProducto(tipoProducto,tipoTamPeso,precio,stock)
+    contadorId = 1;
+    PostProducto(contadorId,tipoProducto,tipoTamPeso,precio,stock)
     return 
   }
   
   //verifico que no cargue 2 veces el mismo producto  
   for (const key in productos) {
     if (productos[key].tipo == tipoProducto.value && productos[key].tamanio == tipoTamPeso.value) {
-      alertCarga(2)
+      alertCarga(2,'producto')
       return     
     }
   }
 
-  PostProducto(tipoProducto,tipoTamPeso,precio,stock);  
+  contadorId = productos.id + 1;
+  PostProducto(contadorId,tipoProducto,tipoTamPeso,precio,stock);  
 });
 
   /************************** FUNCIONES ADICIONALES ***************************** */
  
-  const alertCarga = (tipo) => {
-    debugger
-    if (tipo == 1) {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Producto cargado con Exito',
-        showConfirmButton: false,
-        timer: 2000
-      })
-    } else {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'El Producto ya se encuentra cargado',
-        showConfirmButton: false,
-        timer: 2000
-      })
-    }
-  }
 
 
-const PostProducto = (tipoProducto,tipoTamPeso,precio,stock) => {
+
+const PostProducto = (contador,tipoProducto,tipoTamPeso,precio,stock) => {
 
   fetch('http://localhost:5000/Productos', {
   method: 'POST',
@@ -98,16 +81,17 @@ const PostProducto = (tipoProducto,tipoTamPeso,precio,stock) => {
     'content-type': 'application/json; charset=UTF-8',
   },
   body: JSON.stringify({
+    id: contador,
     tipo: tipoProducto.value,
-    tamanio: tipoTamPeso.value,
-    precio: precio.value,
-    stock: stock.value
+    tamanio: Number(tipoTamPeso.value),
+    precio: Number(precio.value),
+    stock: Number(stock.value)
 
   })
 })
   .then((resp) => resp.json())
   .then((data) => {
-    alertCarga(1);
+    alertCarga(1,"Producto");
     })
 }
 

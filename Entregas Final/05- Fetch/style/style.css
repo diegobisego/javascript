@@ -10,12 +10,13 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+body {
+    height: 100%;
+}
 
 /******** BOTONES NAV **********/
 
-body {
-    height: 100vh;
-}
+
 
 #navbar {
     display: flex;

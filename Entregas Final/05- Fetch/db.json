@@ -8,71 +8,37 @@
       "id": 1
     },
     {
-      "tipo": "Prueba 2",
-      "tamanio": "G",
-      "precio": "2",
-      "stock": "2",
+      "tipo": "Aceitunas",
+      "tamanio": "5",
+      "precio": "4000",
+      "stock": "8000",
       "id": 2
     },
     {
-      "tipo": "Prueba",
-      "tamanio": "G",
-      "precio": "22",
-      "stock": "33",
+      "tipo": "Morrones",
+      "tamanio": 800,
+      "precio": 1200,
+      "stock": 600,
       "id": 3
     },
     {
-      "tipo": "",
-      "tamanio": "",
-      "precio": "",
-      "stock": "",
+      "tipo": "Vinagre",
+      "tamanio": 10,
+      "precio": 1000,
+      "stock": 5000,
       "id": 4
     },
     {
-      "tipo": "",
-      "tamanio": "",
-      "precio": "",
-      "stock": "",
+      "tipo": "Huevos",
+      "tamanio": 1,
+      "precio": 3243,
+      "stock": 1244,
       "id": 5
-    },
-    {
-      "tipo": "",
-      "tamanio": "",
-      "precio": "",
-      "stock": "",
-      "id": 6
-    },
-    {
-      "tipo": "",
-      "tamanio": "",
-      "precio": "",
-      "stock": "",
-      "id": 7
-    },
-    {
-      "tipo": "",
-      "tamanio": "",
-      "precio": "",
-      "stock": "",
-      "id": 8
-    },
-    {
-      "tipo": "",
-      "tamanio": "",
-      "precio": "",
-      "stock": "",
-      "id": 9
-    },
-    {
-      "tipo": "",
-      "tamanio": "",
-      "precio": "",
-      "stock": "",
-      "id": 10
     }
   ],
   "clientes": [
     {
+      "id": "1",
       "nombre": "Diego Bisego",
       "dniCuit": "32934045",
       "telefono": "3534774748",
@@ -80,6 +46,16 @@
       "Ciudad": "Villa Maria",
       "email": "diegobisego@gmail.com",
       "tipoPago": "Contado Efectivo"
+    },
+    {
+      "id": "XXGMowo",
+      "nombre": "Telma Cordoba",
+      "dniCuit": "213213",
+      "telefono": "123213",
+      "domicilio": "Pellegrini 342",
+      "Ciudad": "undefined",
+      "email": "diegobisego@gmail.com",
+      "tipoPago": "Transferencia"
     }
   ],
   "usuarios": [
